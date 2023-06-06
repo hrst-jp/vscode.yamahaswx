@@ -1,0 +1,34 @@
+{
+  "name": "yamaha-swx",
+  "displayName": "YAMAHA SWX series",
+  "description": "Highlite the Configuration File of YAMAHA SWX series",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "yamahaswx",
+        "aliases": [
+          "YAMAHA SWX",
+          "yamahaswx"
+        ],
+        "extensions": [
+          ".swx"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "yamahaswx",
+        "scopeName": "text.yamahaswx",
+        "path": "./syntaxes/yamahaswx.tmLanguage.json"
+      }
+    ]
+  }
+}

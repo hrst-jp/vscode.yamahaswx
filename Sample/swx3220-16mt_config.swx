@@ -1,0 +1,317 @@
+!
+!  - Startup Configuration -
+!  Last Modified: Wed Nov 30 15:12:46 JST 2022
+!
+enable password (�p�X���[�h�F�K�{)
+!
+username (���[�U�[���F�K�{) privilege on password (�p�X���[�h�F�K�{)
+!
+qos enable
+!
+dns-client enable
+lldp run
+lldp auto-setting enable
+!
+access-list 1 10 deny any any 192.168.40.0 0.0.0.255
+access-list 1 20 deny any any 192.168.50.0 0.0.0.255
+access-list 2 10 deny any any 192.168.30.0 0.0.0.255
+access-list 2 20 deny any any 192.168.40.0 0.0.0.255
+access-list 2 30 deny any any 192.168.50.0 0.0.0.255
+access-list 2 40 deny any any 192.168.60.0 0.0.0.255
+access-list 3 10 deny any any 192.168.20.0 0.0.0.255
+access-list 3 20 deny any any 192.168.40.0 0.0.0.255
+access-list 3 30 deny any any 192.168.50.0 0.0.0.255
+access-list 3 40 deny any any 192.168.60.0 0.0.0.255
+access-list 4 10 deny any any 192.168.1.0 0.0.0.255
+access-list 4 20 deny any any 192.168.20.0 0.0.0.255
+access-list 4 30 deny any any 192.168.30.0 0.0.0.255
+access-list 4 40 deny any any 192.168.50.0 0.0.0.255
+access-list 4 50 deny any any 192.168.60.0 0.0.0.255
+access-list 5 10 deny any any 192.168.1.0 0.0.0.255
+access-list 5 20 deny any any 192.168.20.0 0.0.0.255
+access-list 5 30 deny any any 192.168.30.0 0.0.0.255
+access-list 5 40 deny any any 192.168.40.0 0.0.0.255
+access-list 5 50 deny any any 192.168.60.0 0.0.0.255
+access-list 6 10 deny any any 192.168.20.0 0.0.0.255
+access-list 6 20 deny any any 192.168.30.0 0.0.0.255
+access-list 6 30 deny any any 192.168.40.0 0.0.0.255
+access-list 6 40 deny any any 192.168.50.0 0.0.0.255
+access-list 7 10 permit any any 192.168.40.0 0.0.0.255
+access-list 8 10 permit any 192.168.40.0 0.0.0.255 any
+!
+dhcp-server enable
+!
+class-map class-limit1
+ match access-list 7
+!
+class-map class-limit2
+ match access-list 8
+!
+policy-map pmap1
+ class class-limit1
+  police single-rate 100000 10240 10240 yellow-action drop red-action drop
+!
+policy-map pmap2
+ class class-limit2
+  police single-rate 100000 10240 10240 yellow-action drop red-action drop
+!
+vlan database
+ vlan 20 name VLAN0020
+ vlan 30 name VLAN0030
+ vlan 40 name VLAN0040
+ vlan 50 state enable
+ vlan 60 name VLAN0060 state disable
+private-vlan 20 primary
+private-vlan 20 community
+multiple-vlan group 10 name Network1
+
+
+!
+interface port1.1
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan add 20,30,40,60
+ service-policy input pmap2
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.2
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan add 30,50
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.3
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan add 20,30,40,60
+ switchport private-vlan host-association 100 add 103
+  switchport private-vlan mapping 100 add 102
+ service-policy input pmap2
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.4
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan add 20,50
+ switchport trunk native vlan none
+ switchport voice vlan dot1p
+ 
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.5
+ switchport
+ switchport mode access
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.6
+ switchport
+ switchport mode access
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.7
+ switchport
+ switchport mode access
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.8
+ switchport
+ switchport mode access
+ switchport access vlan 40
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.9
+ switchport
+ switchport mode access
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.10
+ switchport
+ switchport mode access
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.11
+ switchport
+ switchport mode access
+ switchport access vlan 50
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.12
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan add 20,30,40
+ service-policy input pmap1
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.13
+ switchport
+ switchport mode access
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.14
+ switchport
+ switchport mode access
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.15
+ switchport
+ switchport mode access
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface port1.16
+ switchport
+ switchport mode access
+ no shutdown
+ lldp-agent
+  set lldp enable txrx 
+  exit 
+!
+interface vlan1
+ no switchport
+ auto-ip enable
+ ip address 192.168.1.240/24
+ no shutdown
+!
+interface vlan20
+ no switchport
+ ip address 192.168.20.240/24
+ no shutdown
+ dhcp-server enable
+!
+interface vlan30
+ no switchport
+ ip address 192.168.30.240/24
+ no shutdown
+ dhcp-server enable
+!
+interface vlan40
+ no switchport
+ ip address 192.168.40.240/24
+ no shutdown
+ dhcp-server enable
+!
+interface vlan50
+ no switchport
+ ip address 192.168.50.240/24
+ no shutdown
+!
+interface vlan60
+ no switchport
+ ip address 192.168.60.240/24
+ no shutdown
+!
+vlan access-map VAM-001
+ match access-list 1
+!
+vlan access-map VAM-020
+ match access-list 2
+!
+vlan access-map VAM-030
+ match access-list 3
+!
+vlan access-map VAM-040
+ match access-list 4
+!
+vlan access-map VAM-050
+ match access-list 5
+!
+vlan access-map VAM-060
+ match access-list 6
+!
+vlan filter VAM-001 1 in
+!
+vlan filter VAM-020 20 in
+!
+vlan filter VAM-030 30 in
+!
+vlan filter VAM-040 40 in
+!
+vlan filter VAM-050 50 in
+!
+vlan filter VAM-060 60 in
+!
+ip route 0.0.0.0/0 192.168.1.1
+!
+!
+clock timezone JST
+!
+ntpdate server ipv4 192.168.1.1
+ntpdate interval 24
+!
+http-server enable
+http-proxy enable
+!
+telnet-server enable
+!
+dhcp pool pool_vlan20
+ network 192.168.20.0/24
+ range 192.168.20.2 192.168.20.191
+ default-router 192.168.20.240
+ dns-server 192.168.20.1
+!
+dhcp-relay disable
+dhcp pool pool_vlan30
+ network 192.168.30.0/24
+ range 192.168.30.2 192.168.30.191
+ default-router 192.168.30.240
+ dns-server 192.168.30.1
+!
+dhcp pool pool_vlan40
+ network 192.168.40.0/24
+ range 192.168.40.2 192.168.40.191
+ default-router 192.168.40.240
+ dns-server 192.168.40.1
+!
+line con 0
+line vty 0 7
+!
+l2ms configuration
+ l2ms role manager
+!
+snapshot enable
+!
+end
