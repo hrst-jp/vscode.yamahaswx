@@ -1,161 +1,597 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "YAMAHA SWX",
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "YAMAHA SWX",
     "patterns": [
         {
-            "include": "#swx-l2-vlan"
+            "include": "#comment"
         },
         {
-            "include": "#swx-traffic-acl"
+            "include": "#swx-conf-mode"
+
         },
         {
-            "include": "#swx-traffic-qos",
-            "comment": "9.2 QoS (Quality of Service)"
+            "include": "#swx-4.27-stack"
         },
         {
-            "include": "#swx-ap-dhcp"
+            "include": "#swx-5.1-interface"
         },
         {
-            "include": "#swx-ap-dhcp-relay"
+            "include": "#swx-5.2-lag"
         },
         {
-            "include": "#swx-ap-dns-relay"
+            "include": "#swx-6.2-vlan"
+        },
+        {
+            "include": "#swx-7.1-ipv4addr"
+        },
+        {
+            "include": "#swx-7.2-ipv4-route"
+        },
+        {
+            "include": "#swx-9.1-acl"
+        },
+        {
+            "include": "#swx-9.2-qos"
+        },
+        {
+            "include": "#swx-10.1-dhcp-server"
+        },
+        {
+            "include": "#swx-10.2-dhcp-relay"
+        },
+        {
+            "include": "#swx-10.3-dns-relay"
+        },
+        {
+            "include": "#keyword",
+            "comment": "コマンド内で利用される汎用的な予約語など"
         }
     ],
     "repository": {
-        "swx-l2-vlan": {
+        "comment": {
             "patterns": [
                 {
-                    "match": "^vlan (database)",
-                    "name": "entity.name.function",
+                    "match": "^!.*",
+                    "name": "comment.line"
+                },
+                {
+                    "match": "description .*",
+                    "name": "comment.line"
+                }
+            ]
+        },
+        "keyword": {
+            "patterns": [
+                {
+                    "match": "\\b([0-9a-f]{0,4}:){7}[0-9a-f]{0,4}(%\\S+|(/([1-9]?[0-9]|1[0-9]{2}|12[0-8])))?\\b",
+                    "name": "string",
+                    "comment": "IPv6 Address省略なし"
+                },
+                {
+                    "match": "\\b([0-9a-f]{0,4}:){3}(:|[0-9a-f]{0,4})?(:[0-9a-f]{0,4}){0,4}(%\\S+|(/([1-9]?[0-9]|1[0-9]{2}|12[0-8])))?\\b",
+                    "name": "string",
+                    "comment": "IPv6 Address省略あり48bitマスク以上"
+                },
+                {
+                    "match": "\\b(dhcp|ra)-prefix@lan([0-9a-f:]+)(%\\S+)?(/([1-9]?[0-9]|1[0-9]{2}|12[0-8]))?\\b",
+                    "name": "string",
+                    "comment": "IPv6 プレフィックス表記"
+                },
+                {
+                    "match": "\\b(([0-9a-fA-F]{2}(:|-)){5}[0-9a-fA-F]{2})\\b",
+                    "name": "string",
+                    "comment": "MACアドレス"
+                },
+                {
+                    "match": "\\b(([0-1][0-9]|2[0-3]):[0-5][0-9])\\b",
+                    "name": "constant.numeric",
+                    "comment": "時間"
+                },
+                {
+                    "match": "\\b(\\d+)\\b",
+                    "name": "constant.numeric",
+                    "comment": "数字"
+                }
+            ]
+        },
+        "swx-conf-mode": {
+            "patterns": [
+                {
+                    "match": "^interface (port(1|2)\\.\\d+|sa\\d+|po\\d+|vlan\\d+)",
+                    "name": "storage",
                     "captures": {
                         "1": {
-                            "name": "string"
+                            "name": "constant.language"
                         }
                     }
                 },
                 {
-                    "match": " vlan (\\d+)( name (\\S+))?( state (enable|disable))?",
+                    "match": "^line (con|vty)",
+                    "name": "storage"
+                },
+                {
+                    "match": "^(spanning-tree mst configuration|class-map|policy-map|class)",
+                    "name": "storage"
+                },
+                {
+                    "match": "^(l2ms configuration|lldp-agent|router ospf|router ipv6 ospf|router rip|router ipv6 rip)",
+                    "name": "storage"
+                },
+                {
+                    "match": "^(key chain|key|router vrrp|dhcp pool|mail template|radius-server local-profile)",
+                    "name": "storage"
+                }
+            ]
+        },
+        "swx-4.27-stack": {
+            "patterns": [
+                {
+                    "comment": "4.27.1",
+                    "match": "\\b(stack (enable|disable))\\b",
                     "name": "entity.name.function",
                     "captures": {
-                        "1": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.27.2",
+                    "match": "\\b(stack (1|2) renumber (1|2))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.27.3",
+                    "match": "\\b(stack subnet (auto-ip|(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}0))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-5.1-interface": {
+            "patterns": [
+                {
+                    "comment": "5.1.2",
+                    "match": "\\b((no )?shutdown)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "5.1.3",
+                    "match": "\\b(speed-duplex (auto|10000-full|100-full|100-half))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.1.4",
+                    "match": "\\b(negotiation( (10000-full|5000-full|2500-full|1000-full|100-full|100-half))+)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.1.6",
+                    "match": "\\b(mru (\\d{2,5}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.1.7",
+                    "match": "\\b(mdix auto (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.1.8",
+                    "match": "\\b(eee (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.1.11",
+                    "match": "\\b(mirror interface (port\\d+\\.\\d+) direction (both|receive|transmit))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.language"
+                        },
+                        "3": {
+                            "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.1.19",
+                    "match": "\\b(sfp-monitor rx-power (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.1.21",
+                    "match": "\\b(tx-queue-monitor usage-rate (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-5.2-lag": {
+            "patterns": [
+                {
+                    "comment": "5.2.1",
+                    "match": "\\b(static-channel-group (\\d{1,2}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.2.3",
+                    "match": "\\b(channel-group (\\d{1,3}) mode (active|passive))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
                             "name": "constant.numeric"
                         },
                         "3": {
                             "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.2.5",
+                    "match": "\\b(lacp system-priority (\\d{1,5}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.2.7",
+                    "match": "\\b(lacp multi-speed (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.2.8",
+                    "match": "\\b(lacp timeout (short|long))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.2.11",
+                    "match": "\\b(port-channel load-balance (src-dst|dst|src)-(ip|mac|port))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.2.12",
+                    "match": "\\b(lacp port-priority (\\d{1,5}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-6.2-vlan": {
+            "patterns": [
+                {
+                    "comment": "6.2.1",
+                    "match": "\\b(vlan database)\\b",
+                    "name": "storage"
+                },
+                {
+                    "comment": "6.2.2",
+                    "match": "\\b(vlan (\\d+)( name (\\S+))?( state (enable|disable))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
                         },
-                        "5": {
+                        "4": {
+                            "name": "string"
+                        },
+                        "6": {
                             "name": "keyword.control"
                         }
                     }
                 },
                 {
-                    "match": "private-vlan (\\d+) (primary|community|isolated)",
+                    "comment": "6.2.3",
+                    "match": "\\b(private-vlan (\\d+) (primary|community|isolated))\\b",
                     "name": "entity.name.function",
                     "captures": {
-                        "1": {
+                        "2": {
                             "name": "constant.numeric"
                         },
+                        "3": {
+                            "name": "keyword"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.2.4",
+                    "match": "\\b(private-vlan (\\d+) association (add|remove))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.2.5",
+                    "match": "\\b(switchport mode access)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.2.6",
+                    "match": "\\b(switchport access vlan \\d{1,4})\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.2.7",
+                    "match": "\\b(switchport mode trunk( ingress-filter (enable|disable))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.2.8",
+                    "match": "\\b(switchport trunk allowed vlan (all|none|add|except|remove))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.2.9",
+                    "match": "\\b(switchport trunk native vlan)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.2.10",
+                    "match": "\\b(switchport mode private-vlan (promiscuous|host))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
                         "2": {
                             "name": "entity.name.type"
                         }
                     }
                 },
                 {
-                    "match": "private-vlan (\\d+) association (add|remove)",
+                    "comment": "6.2.11",
+                    "match": "\\b(switchport private-vlan host-association (\\d+) add)\\b",
                     "name": "entity.name.function",
                     "captures": {
-                        "1": {
-                            "name": "constant.numeric"
-                        },
                         "2": {
-                            "name": "keyword.control"
+                            "name": "constant.numeric"
                         }
                     }
                 },
                 {
-                    "match": " switchport mode access",
-                    "name": "entity.name.function"
-                },
-                {
-                    "match": " switchport access vlan",
-                    "name": "entity.name.function"
-                },
-                {
-                    "match": " switchport mode trunk",
-                    "name": "entity.name.function"
-                },
-                {
-                    "match": " switchport trunk allowed vlan (all|none|add|except|remove)",
+                    "comment": "6.2.12",
+                    "match": "\\b(switchport private-vlan mapping (\\d+) (add|remove))\\b",
                     "name": "entity.name.function",
                     "captures": {
-                        "1": {
-                            "name": "keyword.control"
+                        "2": {
+                            "name": "constant.numeric"
                         }
                     }
                 },
                 {
-                    "match": " switchport trunk native vlan",
-                    "name": "entity.name.function"
-                },
-                {
-                    "match": " switchport mode private-vlan (promiscuous|host)",
+                    "comment": "6.2.13, 6.2.14, 6.2.15",
+                    "match": "\\b(switchport voice (vlan|cos|dscp) (\\d+|dot1p|untagged)?)\\b",
                     "name": "entity.name.function",
                     "captures": {
-                        "1": {
+                        "3": {
                             "name": "entity.name.type"
                         }
                     }
                 },
                 {
-                    "match": " switchport private-vlan (host-association|mapping) (\\d+) add",
-                    "name": "entity.name.function",
-                    "captures": {
-                        "2": {
-                            "name": "constant.numeric"
-                        }
-                    }
-                },
-                {
-                    "match": "switchport voice (vlan|cos|dscp) (dot1p|untagged)?",
-                    "name": "entity.name.function",
-                    "captures": {
-                        "2": {
-                            "name": "entity.name.type"
-                        }
-                    }
-                },
-                {
-                    "match": " switchport multiple-vlan group",
+                    "comment": "6.2.16",
+                    "match": "\\b(switchport multiple-vlan group)\\b",
                     "name": "entity.name.function"
                 },
                 {
-                    "match": "multiple-vlan group (\\d+) name (\\S+)",
+                    "comment": "6.2.17",
+                    "match": "\\b(multiple-vlan group (\\d+) name (\\S+))\\b",
                     "name": "entity.name.function",
                     "captures": {
-                        "1": {
+                        "2": {
                             "name": "constant.numeric"
                         },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.2.18",
+                    "match": "\\b(multiple-vlan transfer ympi (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-7.1-ipv4addr": {
+            "patterns": [
+                {
+                    "comment": "7.1.1",
+                    "match": "\\b(ip address ((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])((/([1-2]?[0-9])|3[0-2]))|((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]) ((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))))( secondary)?( \\S+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "17": {
+                            "name": "keyword.control"
+                        },
+                        "18": {
+                            "name": "comment"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.1.3",
+                    "match": "\\b(ip address dhcp( hostname (\\S+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.1.5",
+                    "match": "\\b(auto-ip (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-7.2-ipv4-route": {
+            "patterns": [
+                {
+                    "comment": "7.2.1",
+                    "match": "\\b(ip route ((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])((/(([1-2]?[0-9])|3[0-2]))|(\\s(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])))) ((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])|null)( \\d+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "14": {
+                            "name": "string"
+                        },
+                        "18": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.2.2",
+                    "match": "\\b(maximum-paths (1|[1-8]))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-9.1-acl": {
+            "patterns": [
+                {
+                    "match": "\\b(access-list \\d{1,4} \\d{1,5} (deny|permit))\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "match": "\\b(access-list \\d{1,4} description (\\S{1,32}))\\b",
+                    "name": "comment.line"
+                },
+                {
+                    "match": "\\b(access-group (\\d{1,4}) (in|out))\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "match": "\\b(vlan access-map \\S{1,256})\\b",
+                    "name": "storage",
+                    "captures": {
                         "2": {
                             "name": "string"
                         }
                     }
                 },
                 {
-                    "match": "multiple-vlan transfer ympi",
+                    "match": "\\b(match access-list)\\b",
                     "name": "entity.name.function"
-                }
-            ]
-        },
-        "swx-traffic-acl": {
-            "patterns": [
+                },
                 {
-                    "match": "^access-list ",
+                    "match": "\\b(vlan filter (\\S{1,256}) (\\d{1,4}))\\b",
                     "name": "entity.name.function"
                 }
             ]
         },
-        "swx-traffic-qos": {
+        "swx-9.2-qos": {
             "patterns": [
                 {
                     "match": "^qos (cos-queue|dscp-queue|queue sent-from-cpu|wrr-weight)?",
@@ -200,56 +636,197 @@
                 }
             ]
         },
-        "swx-ap-dhcp": {
+        "swx-10.1-dhcp-server": {
             "patterns": [
                 {
-                    "match": "\\b(dhcp-server)\\b",
-                    "name": "entity.name.function"
-                },
-                {
-                    "match": "server-type (normal|auth-web)",
+                    "comment": "10.1.1, 10.1.2, 10.1.9",
+                    "match": "\\b((dhcp-server|probe) (enable|disable))\\b",
                     "name": "entity.name.function",
                     "captures": {
-                        "1": {
-                            "name": "entity.name.type"
+                        "3": {
+                            "name": "keyword.control"
                         }
                     }
                 },
                 {
-                    "match": "^dhcp pool (\\S+)",
+                    "comment": "10.1.3",
+                    "match": "\\b(server-type (normal|auth-web))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.1.4",
+                    "match": "\\b(dhcp pool (\\S{1,31}))\\b",
                     "name": "storage",
                     "captures": {
-                        "1": {
+                        "2": {
                             "name": "string"
                         }
                     }
                 },
                 {
-                    "match": " (network|range|bind host|lease|probe( timeout)?|default-router|dns-server|domain-name|bootfile|next-server|option) ",
-                    "name": "entity.name.function"
-                }
-            ]
-        },
-        "swx-ap-dhcp-relay": {
-            "patterns": [
-                {
-                    "match": "^dhcp-relay( broadcast)?",
-                    "name": "entity.name.function"
+                    "comment": "10.1.5",
+                    "match": "\\b(network ((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])((/(([1-2]?[0-9])|3[0-2]))|(\\s(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])))))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
                 },
                 {
-                    "match": " dhcp-relay server-address",
-                    "name": "entity.name.function"
+                    "comment": "10.1.6",
+                    "match": "\\b(range ((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))( (([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "6": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.1.7",
+                    "match": "\\b(bind host ((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])) (([0-9a-f]{4}\\.){2}[0-9a-f]{4}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "6": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.1.8",
+                    "match": "\\b(lease(( \\d+){3,4}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.1.10",
+                    "match": "\\b(probe timeout ([1-5]))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.1.11, 10.1.12,10.1.15",
+                    "match": "\\b((default-router|dns-server|next-server) ((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.1.13, 10.1.14",
+                    "match": "\\b((domain-name|bootfile) (\\S{1,127}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.1.16",
+                    "match": "\\b(option (\\S+ \\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
                 }
             ]
         },
-        "swx-ap-dns-relay": {
+        "swx-10.2-dhcp-relay": {
             "patterns": [
                 {
-                    "match": "dns-forwarding (name-server|cache max-ttl|static-host)?",
-                    "name": "entity.name.function"
+                    "comment": "10.2.1, 10.2.3",
+                    "match": "\\b(dhcp-relay( broadcast)? (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.2.2",
+                    "match": "\\b(dhcp-relay server-address ((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-10.3-dns-relay": {
+            "patterns": [
+                {
+                    "comment": "10.3.1, 10.3.2",
+                    "match": "\\b(dns-forwarding (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.3.3",
+                    "match": "\\b(dns-forwarding name-server (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.3.4",
+                    "match": "\\b(dns-forwarding cache max-ttl (\\d{2,4}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.3.4",
+                    "match": "\\b(dns-forwarding static-host (\\S+ ((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])))( \\d+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "7": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 }
             ]
         }
     },
-	"scopeName": "text.yamahaswx"
+    "scopeName": "text.yamahaswx"
 }

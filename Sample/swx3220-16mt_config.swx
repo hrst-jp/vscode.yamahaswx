@@ -241,7 +241,9 @@ interface vlan50
 !
 interface vlan60
  no switchport
- ip address 192.168.60.240/24
+ ip address 192.168.60.240 255.255.255.0  fffff  
+ip address 192.168.60.240/24 secondary fffff
+
  no shutdown
 !
 vlan access-map VAM-001
@@ -277,6 +279,12 @@ vlan filter VAM-060 60 in
 ip route 0.0.0.0/0 192.168.1.1
 !
 !
+maximum-paths 9
+maximum-paths 1
+maximum-paths 8
+
+
+
 clock timezone JST
 !
 ntpdate server ipv4 192.168.1.1
@@ -305,6 +313,7 @@ dhcp pool pool_vlan40
  range 192.168.40.2 192.168.40.191
  default-router 192.168.40.240
  dns-server 192.168.40.1
+ bind host 192.168.100.100 00a0.deae.b893
 !
 line con 0
 line vty 0 7
@@ -315,3 +324,7 @@ l2ms configuration
 snapshot enable
 !
 end
+dhcp-relay broadcast enable
+dhcp-relay enable
+dhcp-relay server-address 192.168.1.1
+dns-forwarding static-host swx.example.com 192.168.100.100 

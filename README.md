@@ -1,65 +1,25 @@
-# yamaha-swx README
+﻿# yamaha-swx README
+YAMAHA LANスイッチ SWXシリーズの設定ファイルをハイライト表示します。
 
-This is the README for your extension "yamaha-swx". After writing up a brief description, we recommend including the following sections.
+# お知らせ
+* 設定の区切りなどを強調するため、同じ文字でも色がつかない場合があります。
+* 未対応コマンドがありますのでご了承ください。
+* インデント等で正しく表示されない場合があります。
+* 設定例集等を使用して動作確認しています。
 
-## Features
+# 使用方法
+Show Configで表示された結果をコメントを含め保存して下さい。  
+拡張子は ".swx"で機能します。
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+# 対象製品
+SWX3220-16MT/SWX3220-16TMs
+そのた類似コマンドの対象製品
 
-For example if there is an image subfolder under your extension project workspace:
+# 参考資料
+* [ヤマハネットワーク製品](https://network.yamaha.com/)
+* [ヤマハネットワーク周辺機器技術情報](http://www.rtpro.yamaha.co.jp/)
+* [ ヤマハスイッチ製品技術情報サイト](http://www.rtpro.yamaha.co.jp/SW/)
+* [RTシリーズのマニュアル](http://www.rtpro.yamaha.co.jp/RT/manual.html)
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+# ソース
+* [GitHub](https://github.com/hrst-jp/vscode.yamahaswx)

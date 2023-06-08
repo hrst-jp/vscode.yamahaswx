@@ -1,8 +1,9 @@
 {
   "name": "yamaha-swx",
   "displayName": "YAMAHA SWX series",
-  "description": "Highlite the Configuration File of YAMAHA SWX series",
+  "description": "Highlight the configuration file of YAMAHA SWX series",
   "version": "0.0.1",
+  "publisher": "hrst",
   "engines": {
     "vscode": "^1.78.0"
   },
@@ -20,6 +21,7 @@
         "extensions": [
           ".swx"
         ],
+
         "configuration": "./language-configuration.json"
       }
     ],
@@ -30,5 +32,9 @@
         "path": "./syntaxes/yamahaswx.tmLanguage.json"
       }
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hrst-jp/vscode.yamahaswx"
   }
 }
