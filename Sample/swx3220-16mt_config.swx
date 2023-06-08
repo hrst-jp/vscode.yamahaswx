@@ -6,12 +6,15 @@ enable password (�p�X���[�h�F�K�{)
 !
 username (���[�U�[���F�K�{) privilege on password (�p�X���[�h�F�K�{)
 !
+
 qos enable
 !
 dns-client enable
 lldp run
 lldp auto-setting enable
 !
+firmware-update reload-time 3
+
 access-list 1 10 deny any any 192.168.40.0 0.0.0.255
 access-list 1 20 deny any any 192.168.50.0 0.0.0.255
 access-list 2 10 deny any any 192.168.30.0 0.0.0.255
@@ -322,9 +325,16 @@ l2ms configuration
  l2ms role manager
 !
 snapshot enable
+snapshot trap terminal except-wireless
 !
 end
 dhcp-relay broadcast enable
 dhcp-relay enable
 dhcp-relay server-address 192.168.1.1
 dns-forwarding static-host swx.example.com 192.168.100.100 
+l2ms enable
+l2ms role manager
+event-watch disable
+event-watch interval 60
+terminal-watch interval 60
+wireless-terminal-watch interval 22

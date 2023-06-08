@@ -8,18 +8,18 @@ YAMAHA LANスイッチ SWXシリーズの設定ファイルをハイライト表
 * 設定例集等を使用して動作確認しています。
 
 # 使用方法
-Show Configで表示された結果をコメントを含め保存して下さい。  
-拡張子は ".swx"で機能します。
+show startup-config または show running-config で表示された結果を  
+拡張子に ".swx"を設定して保存したファイルを開きます。
 
 # 対象製品
-SWX3220-16MT/SWX3220-16TMs
+SWX3220-16MT/SWX3220-16TMs  
 そのた類似コマンドの対象製品
 
 # 参考資料
 * [ヤマハネットワーク製品](https://network.yamaha.com/)
 * [ヤマハネットワーク周辺機器技術情報](http://www.rtpro.yamaha.co.jp/)
-* [ ヤマハスイッチ製品技術情報サイト](http://www.rtpro.yamaha.co.jp/SW/)
-* [RTシリーズのマニュアル](http://www.rtpro.yamaha.co.jp/RT/manual.html)
+* [ヤマハスイッチ製品技術情報](http://www.rtpro.yamaha.co.jp/SW/)
+* [マニュアル](http://www.rtpro.yamaha.co.jp/RT/manual.html)
 
 # ソース
 * [GitHub](https://github.com/hrst-jp/vscode.yamahaswx)
