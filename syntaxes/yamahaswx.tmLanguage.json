@@ -1490,7 +1490,231 @@
             ]
         },
         "swx-7.12-ospf": {},
-        "swx-7.13-rip": {},
+        "swx-7.13-rip": {
+            "patterns": [
+                {
+                    "comment": "7.13.1",
+                    "match": "\\b(router rip)\\b",
+                    "name": "storage"
+                },
+                {
+                    "comment": "7.13.2",
+                    "match": "\\b(router ipv6 rip)\\b",
+                    "name": "storage"
+                },
+                {
+                    "comment": "7.13.3",
+                    "match": "\\b(default-information originate( always)?)\\b",
+                    "name": "support.function"
+                },
+                {
+                    "comment": "7.13.4, 7.13.5",
+                    "match": "\\b((default-metric|distance) (\\d+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.6",
+                    "match": "\\b(distribute-list (\\d+) (in|out)( \\S+)?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "keyword.control"
+                        },
+                        "4": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.7",
+                    "match": "\\b(neighbor (\\S+)( \\S+)?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.8",
+                    "match": "\\b(network (\\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.9",
+                    "match": "\\b(offset-list (\\d+) (in|out) (\\d+)( \\S+)?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "keyword.control"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        },
+                        "5": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.10",
+                    "match": "\\b(passive-interface (\\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.11",
+                    "match": "\\b(redistribute (connected|ospf6|ospf|static)( metric (\\d+))?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "entity.name.type"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.12",
+                    "match": "\\b(timers basic ((\\d+) (\\d+) (\\d+)))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.13",
+                    "match": "\\b(version ([1-2]))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.14",
+                    "match": "\\b(ip rip authentication key-chain((\\s\\S+)+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.15",
+                    "match": "\\b(ip rip authentication mode (text|md5))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.16",
+                    "match": "\\b(ip rip authentication string (\\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.17, 7.13.18, 7.13.20",
+                    "match": "\\b(ip rip (metric-zero-accept|receive-packet|send-packet) (enable|disable))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "3": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.19",
+                    "match": "\\b(ip rip receive version ([1-2]( [1-2])?))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.21",
+                    "match": "\\b(ip rip send version( (1-compatible|[1-2]))?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.22, 7.13.23",
+                    "match": "\\b(ip rip (split-horizon|poison-reverse) (enable|disable))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "3": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.24",
+                    "match": "\\b(ipv6 rip metric-offset (\\d+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.25, 7.13.26",
+                    "match": "\\b(ipv6 rip (split-horizon|poison-reverse) (enable|disable))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "3": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.13.27",
+                    "match": "\\b(ipv6 router rip)\\b",
+                    "name": "support.function"
+                }
+            ]
+        },
         "swx-7.14-vrrp": {
             "patterns": [
                 {
@@ -1504,7 +1728,7 @@
                 {
                     "comment": "7.15.1",
                     "match": "\\b(route-map (\\d+)( permit|deny)?( \\d+)?)\\b",
-                    "name": "entity.name.function",
+                    "name": "storage",
                     "captures": {
                         "2": {
                             "name": "constant.numeric"

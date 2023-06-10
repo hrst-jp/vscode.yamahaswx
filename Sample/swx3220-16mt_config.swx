@@ -14,7 +14,23 @@ lldp run
 lldp auto-setting enable
 !
 firmware-update reload-time 3
+ip rip send version 1-compatible
+router rip
+  version 2
+  network 192.168.0.0/16
+  exit
+route-map 1 permit 10
+  match access-list 1
+  set ip next-hop 192.168.100.200
+  exit
 
+interface vlan1
+  ip policy route-map 1
+  exit
+router ospf
+  ospf router-id 192.168.100.240
+  network 192.168.0.0/16 area 0
+  exit
 access-list 1 10 deny any any 192.168.40.0 0.0.0.255
 access-list 1 20 deny any any 192.168.50.0 0.0.0.255
 access-list 2 10 deny any any 192.168.30.0 0.0.0.255
