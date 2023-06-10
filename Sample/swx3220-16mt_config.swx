@@ -320,10 +320,21 @@ dhcp pool pool_vlan40
 !
 line con 0
 line vty 0 7
+baudrate select 19200
+logging facility local7
 !
 l2ms configuration
  l2ms role manager
 !
+snmp-server view standard 1.3.6.1.2.1 include
+snmp-server group admins priv read most write most
+snmp-server group admins priv read most
+snmp-server user admin1 admins auth sha passwd1234 priv aes passwd1234
+
+mail server smtp 1 host smtp-server-test2.com encrypt over-ssl auth test_user test_password
+
+
+
 snapshot enable
 snapshot trap terminal except-wireless
 !
