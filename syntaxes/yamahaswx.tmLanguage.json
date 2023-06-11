@@ -153,10 +153,31 @@
             "include": "#swx-7.15-pbr"
         },
         {
+            "include": "#swx-8.1-ip-multicast"
+        },
+        {
+            "include": "#swx-8.2-igmp"
+        },
+        {
+            "include": "#swx-8.3-mld"
+        },
+        {
+            "include": "#swx-8.4-pim"
+        },
+        {
+            "include": "#swx-8.5-igmp-protocol"
+        },
+        {
             "include": "#swx-9.1-acl"
         },
         {
             "include": "#swx-9.2-qos"
+        },
+        {
+            "include": "#swx-9.3-flowcontrol"
+        },
+        {
+            "include": "#swx-9.4-storm"
         },
         {
             "include": "#swx-10.1-dhcp-server"
@@ -3200,6 +3221,674 @@
                 }
             ]
         },
+        "swx-8.1-ip-multicast": {
+            "patterns": [
+                {
+                    "comment": "8.1.1",
+                    "match": "\\b(ip multicast-routing)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "8.1.2",
+                    "match": "\\b(multicast (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.1.3",
+                    "match": "\\b(ip mroute (\\S+)( (rip|ospf))? (\\S+)( \\d+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "entity.name.type"
+                        },
+                        "5": {
+                            "name": "string"
+                        },
+                        "6": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.1.4",
+                    "match": "\\b(ip multicast route-limit (\\d+)( \\d+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.1.9",
+                    "match": "\\b(l2-unknown-mcast (discard|flood))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.1.10",
+                    "match": "\\b(l2-unknown-mcast forward( link-local)?( \\S+ \\S+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.1.11",
+                    "match": "\\b(l2-mcast snooping tcn-query (enable|disable)( \\d+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-8.2-igmp": {
+            "patterns": [
+                {
+                    "comment": "8.2.1",
+                    "match": "\\b(ip igmp snooping (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.2.2",
+                    "match": "\\b(ip igmp snooping fast-leave)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "8.2.3",
+                    "match": "\\b(ip igmp snooping mrouter interface (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.2.4",
+                    "match": "\\b(ip igmp snooping querier)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "8.2.5",
+                    "match": "\\b(ip igmp snooping query-interval (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.2.6",
+                    "match": "\\b(ip igmp snooping check ttl (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.2.7",
+                    "match": "\\b(ip igmp snooping version (2|3))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.2.8",
+                    "match": "\\b(ip igmp snooping report-suppression (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.2.9",
+                    "match": "\\b(ip igmp snooping mrouter-port data-suppression (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-8.3-mld": {
+            "patterns": [
+                {
+                    "comment": "8.3.1",
+                    "match": "\\b(ipv6 mld snooping (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.3.2",
+                    "match": "\\b(ipv6 mld snooping fast-leave)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "8.3.3",
+                    "match": "\\b(ipv6 mld snooping mrouter interface (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.3.4",
+                    "match": "\\b(ipv6 mld snooping querier)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "8.3.5",
+                    "match": "\\b(ipv6 mld snooping query-interval (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.3.6",
+                    "match": "\\b(ipv6 mld snooping version (2|3))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.3.7",
+                    "match": "\\b(show ipv6 mld snooping mrouter (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-8.4-pim": {
+            "patterns": [
+                {
+                    "comment": "8.4.1",
+                    "match": "\\b(ip pim (dense-mode|sparse-mode)( passive)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "entity.name.type"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.2",
+                    "match": "\\b(ip pim hello-interval (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.3",
+                    "match": "\\b(ip pim hello-holdtime (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.4",
+                    "match": "\\b(ip pim_neighbor-filter (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.5",
+                    "match": "\\b(ip pim exclude-genid)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "8.4.6",
+                    "match": "\\b(ip pim dr-priority (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.7",
+                    "match": "\\b(ip pim rp-address (\\S+) (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.8",
+                    "match": "\\b(ip pim rp-candidate (\\S+)( group-list (\\d+))?( interval (\\d+))?( priority (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        },
+                        "6": {
+                            "name": "constant.numeric"
+                        },
+                        "8": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.9",
+                    "match": "\\b(ip pim crp-fixed-prefix)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "8.4.10",
+                    "match": "\\b(ip pim bsr candidate (\\S+)( \\d+)?( \\d+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.11",
+                    "match": "\\b(ip pim bsr-border)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "8.4.12",
+                    "match": "\\b(ip pim ignore-rp-set-priority)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "8.4.13",
+                    "match": "\\b(ip pim register-source (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.14",
+                    "match": "\\b(ip pim accept-register list (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.15",
+                    "match": "\\b(ip pim register-rate-limit (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.16",
+                    "match": "\\b(ip pim register-checksum all( group-list (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.17",
+                    "match": "\\b(ip pim register-suppression (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.18",
+                    "match": "\\b(ip pim jp-timer (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.19",
+                    "match": "\\b(ip pim rp-register-kat (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.20",
+                    "match": "\\b(ip pim spt-disable( group-list (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.21",
+                    "match": "\\b(ip pim ssm (default|range)( \\d+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "entity.name.type"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.22",
+                    "match": "\\b(ip pim state-refresh origination-interval (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.23",
+                    "match": "\\b(ip pim graft-retransmit (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.24",
+                    "match": "\\b(ip pim propagation-delay (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.4.25",
+                    "match": "\\b(ip pim unicast-bsm)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "8.4.26",
+                    "match": "\\b(ip pim register-rp-reachability)\\b",
+                    "name": "entity.name.function"
+                }
+            ]
+        },
+        "swx-8.5-igmp-protocol": {
+            "patterns": [
+                {
+                    "comment": "8.5.1",
+                    "match": "\\b(ip igmp (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.2",
+                    "match": "\\b(ip igmp version (2|3))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.3",
+                    "match": "\\b(ip igmp query-interval (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.4",
+                    "match": "\\b(ip igmp query-max-response-time (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.5",
+                    "match": "\\b(ip igmp last-member-query-interval (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.6",
+                    "match": "\\b(ip igmp last-member-query-count (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.7",
+                    "match": "\\b(ip igmp querier-timeout (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.8",
+                    "match": "\\b(ip igmp robustness-variable ([2-7]))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.9",
+                    "match": "\\b(ip igmp immediate-leave group-list (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.10",
+                    "match": "\\b(ip igmp check source-address (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.11",
+                    "match": "\\b(ip igmp access-group (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.12",
+                    "match": "\\b(ip igmp limit (\\d+)( except (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.13",
+                    "match": "\\b(ip igmp static-group (\\S+)( source (\\S+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "4": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.14",
+                    "match": "\\b(ip igmp ssm-map (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.15",
+                    "match": "\\b(ip igmp ssm-map static (\\d+) (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.16",
+                    "match": "\\b(ip igmp mroute-proxy (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.5.17",
+                    "match": "\\b(ip igmp proxy-service)\\b",
+                    "name": "entity.name.function"
+                }
+            ]
+        },
         "swx-9.1-acl": {
             "patterns": [
                 {
@@ -3542,6 +4231,37 @@
                 }
             ]
         },
+        "swx-9.3-flowcontrol": {
+            "patterns": [
+                {
+                    "comment": "9.3.1, 9.3.2",
+                    "match": "\\b(flowcontrol (enable|disable|auto|both))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-9.4-storm": {
+            "patterns": [
+                {
+                    "comment": "9.4.1",
+                    "match": "\\b(storm-control(( (broadcast|multicast|unicast))+) level (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "entity.name.type"
+                        },
+                        "5": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
         "swx-10.1-dhcp-server": {
             "patterns": [
                 {
@@ -3736,9 +4456,96 @@
         "swx-10.4-radius": {
             "patterns": [
                 {
+                    "comment": "10.4.1",
+                    "match": "\\b(radius-server local (enable|disable)( \\d+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.4.2",
+                    "match": "\\b(radius-server local interface (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.4.3",
+                    "match": "\\b(crypto pki generate ca (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
                     "comment": "10.4.4",
                     "match": "\\b(radius-server local-profile)\\b",
                     "name": "storage"
+                },
+                {
+                    "comment": "10.4.5",
+                    "match": "\\b(authentication(( (pap|peap|eap-md5|eap-tls|eap-ttls))+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "entity.name.type"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.4.6",
+                    "match": "\\b(nas (\\S+) key (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "10.4.7",
+                    "match": "\\b(user (\\S+) (\\S+)( (vlan (\\d+)|mac (\\S+)|ssid (\\S+)|name (\\S+)|mail (\\S+)|expire (\\S+)|auth (\\S+))){0,7})\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "string"
+                        },
+                        "6":{"name":"constant.numeric"},
+                        "7":{"name":"string"},"8":{"name":"string"},
+                        "9":{"name":"string"},"10":{"name":"string"},
+                        "11":{"name":"string"},"12":{"name":"string"}
+                   
+                   
+                   
+                   
+                    }
+                },
+                {
+                    "comment": "10.4.8",
+                    "match": "\\b(reauth interval (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 }
             ]
         }

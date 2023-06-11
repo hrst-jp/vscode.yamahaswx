@@ -411,3 +411,8 @@ snmp-server host 192.168.100.3 traps version 2c public
 snmp-server enable trap rmon
 rmon event 1 log-trap public
 end
+storm-control broadcast multicast level 30
+authentication pap peap eap-md5 eap-tls eap-ttls
+user yamaha secretpassword mac 00a0.de00.0001 auth peap name YamahaTaro
+user userid password vlan 33 mac mac-address ssid ssid name name mail mail@address auth pap expire date
+user yamaha secretpassword
