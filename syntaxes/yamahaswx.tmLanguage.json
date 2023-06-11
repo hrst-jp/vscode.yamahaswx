@@ -21,6 +21,9 @@
             "include": "#swx-4.8-clock"
         },
         {
+            "include": "#swx-4.9-ptp"
+        },
+        {
             "include": "#swx-4.10-terminal"
         },
         {
@@ -31,6 +34,30 @@
         },
         {
             "include": "#swx-4.13-snmp"
+        },
+        {
+            "include": "#swx-4.14-rmon"
+        },
+        {
+            "include": "#swx-4.15-telnet-server"
+        },
+        {
+            "include": "#swx-4.16-telnet-client"
+        },
+        {
+            "include": "#swx-4.17-tftp-server"
+        },
+        {
+            "include": "#swx-4.18-http-server"
+        },
+        {
+            "include": "#swx-4.19-http-proxy"
+        },
+        {
+            "include": "#swx-4.20-ssh-server"
+        },
+        {
+            "include": "#swx-4.21-ssh-client"
         },
         {
             "include": "#swx-4.22-mail"
@@ -165,7 +192,7 @@
             "patterns": [
                 {
                     "match": "\\b([0-9a-f]{0,4}:){7}[0-9a-f]{0,4}(%\\S+|(/(12[0-8]|1([0-1]|[39]){2}|[1-9]?[0-9])))?\\b",
-                    "name": "string",
+                    "name": "storage",
                     "comment": "IPv6 Address省略なし"
                 },
                 {
@@ -181,7 +208,12 @@
                 {
                     "match": "\\b(([0-9a-fA-F]{2}(:|-)){5}[0-9a-fA-F]{2})\\b",
                     "name": "string",
-                    "comment": "MACアドレス"
+                    "comment": "MACアドレス(HH:HH:HH:HH:HH:HH) or (HH-HH-HH-HH-HH-HH)"
+                },
+                {
+                    "match": "\\b(([0-9a-fA-F]{4}(\\.)){2}[0-9a-fA-F]{4})\\b",
+                    "name": "string",
+                    "comment": "MACアドレス(HHHH.HHHH.HHHH)"
                 },
                 {
                     "match": "\\b(([0-1][0-9]|2[0-3]):[0-5][0-9])\\b",
@@ -198,13 +230,17 @@
         "swx-conf-mode": {
             "patterns": [
                 {
-                    "match": "^interface (port(1|2)\\.\\d+|sa\\d+|po\\d+|vlan\\d+)",
+                    "match": "\\b(interface (port(1|2)\\.\\d+|sa\\d+|po\\d+|vlan\\d+))\\b",
                     "name": "storage",
                     "captures": {
-                        "1": {
+                        "2": {
                             "name": "string"
                         }
                     }
+                },
+                {
+                    "match": "\\b((end|exit))\\b",
+                    "name": "storage"
                 }
             ]
         },
@@ -321,6 +357,46 @@
                     "captures": {
                         "2": {
                             "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-4.9-ptp": {
+            "patterns": [
+                {
+                    "comment": "4.9.1, 4.9.2",
+                    "match": "\\b(ptp (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.9.3",
+                    "match": "\\b(ptp mode (transparent) delay-mechanism (e2e) step (one-step))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "entity.name.type"
+                        },
+                        "3": {
+                            "name": "entity.name.type"
+                        },
+                        "4": {
+                            "name": "entity.name.type"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.9.3",
+                    "match": "\\b(ptp transport protocol udp (ipv4|ipv6))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "entity.name.type"
                         }
                     }
                 }
@@ -602,6 +678,341 @@
                         },
                         "5": {
                             "name": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-4.14-rmon": {
+            "patterns": [
+                {
+                    "comment": "4.14.1",
+                    "match": "\\b(rmon (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.14.2",
+                    "match": "\\b(rmon statistics (\\d+)( owner (\\S+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.14.3",
+                    "match": "\\b(rmon history (\\d+)( buckets (\\d+))?( interval (\\d+))?( owner (\\S+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        },
+                        "6": {
+                            "name": "constant.numeric"
+                        },
+                        "8": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.14.4",
+                    "match": "\\b(rmon event (\\d+) (log-trap|log|trap) (\\S+)( description (\\S+))?( owner (\\S+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "entity.name.type"
+                        },
+                        "4": {
+                            "name": "string"
+                        },
+                        "6": {
+                            "name": "string"
+                        },
+                        "8": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.14.5",
+                    "match": "\\b(rmon alarm (\\d+) (\\S+) interval (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "string"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-4.15-telnet-server": {
+            "patterns": [
+                {
+                    "comment": "4.15.1",
+                    "match": "\\b(telnet-server (enable|disable)( \\d+)?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.15.1",
+                    "match": "\\b(telnet-server interface (\\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.15.1",
+                    "match": "\\b(telnet-server access (deny|permit) (\\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-4.16-telnet-client": {
+            "patterns": [
+                {
+                    "comment": "4.15.1",
+                    "match": "\\b(telnet-client (enable|disable))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-4.17-tftp-server": {
+            "patterns": [
+                {
+                    "comment": "4.17.1",
+                    "match": "\\b(tftp-server (enable|disable)( \\d+)?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.17.1",
+                    "match": "\\b(tftp-server interface (\\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-4.18-http-server": {
+            "patterns": [
+                {
+                    "comment": "4.18.1",
+                    "match": "\\b(http-server (enable|disable)( \\d+)?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.18.2",
+                    "match": "\\b(http-server secure (enable|disable)( \\d+)?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.18.4",
+                    "match": "\\b(http-server interface (\\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.18.5",
+                    "match": "\\b(http-server access (deny|permit) (\\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.18.6",
+                    "match": "\\b(http-server language (japanese|english))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "entity.name.type"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.18.7",
+                    "match": "\\b(http-server login-timeout (\\d+)(\\d+)?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-4.19-http-proxy": {
+            "patterns": [
+                {
+                    "comment": "4.19.1",
+                    "match": "\\b(http-proxy (enable|disable))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.19.2",
+                    "match": "\\b(http-proxy timeout (\\d+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-4.20-ssh-server": {
+            "patterns": [
+                {
+                    "comment": "4.20.1",
+                    "match": "\\b(ssh-server (enable|disable)( \\d+)?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.20.3",
+                    "match": "\\b(ssh-server interface (\\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.20.4",
+                    "match": "\\b(ssh-server access (deny|permit) (\\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.20.8",
+                    "match": "\\b(ssh-server client alive (enable|disable)( \\d+)?( \\d+)?)\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-4.21-ssh-client": {
+            "patterns": [
+                {
+                    "comment": "4.21.2",
+                    "match": "\\b(ssh-client (enable|disable))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
                         }
                     }
                 }
@@ -993,8 +1404,87 @@
                 }
             ]
         },
-        "swx-4.28-schedule": {},
-        "swx-4.29-buzzer": {},
+        "swx-4.28-schedule": {
+            "patterns": [
+                {
+                    "comment": "4.28.1",
+                    "match": "\\b(schedule( \\d+)? (time \\S+ \\S+|event (startup|sd-attached)) (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "5": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.28.3",
+                    "match": "\\b(action (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.28.4",
+                    "match": "\\b(schedule template (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.28.5",
+                    "match": "\\b(cli-command (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.28.6",
+                    "match": "\\b(script (sd))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-4.29-buzzer": {
+            "patterns": [
+                {
+                    "comment": "4.29.1",
+                    "match": "\\b(buzzer (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.29.2",
+                    "match": "\\b(buzzer trigger(( (temperature|fan|loop|spf|startup|sd|all))+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "entity.name.type"
+                        }
+                    }
+                }
+            ]
+        },
         "swx-4.30-general": {
             "patterns": [
                 {
@@ -1188,10 +1678,383 @@
                 }
             ]
         },
-        "swx-5.3-auth": {},
-        "swx-5.4-portsec": {},
-        "swx-5.5-errdisable": {},
-        "swx-6.1-fdb": {},
+        "swx-5.3-auth": {
+            "patterns": [
+                {
+                    "comment": "5.3.1",
+                    "match": "\\b(aaa authentication dot1x)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "5.3.2",
+                    "match": "\\b(aaa authentication auth-mac)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "5.3.3",
+                    "match": "\\b(aaa authentication auth-web)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "5.3.4",
+                    "match": "\\b(dot1x port-control (auto|force-authorized|force-unauthorized))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.5",
+                    "match": "\\b(dot1x control-direction (both|in))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.6",
+                    "match": "\\b(dot1x max-auth-req (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.7",
+                    "match": "\\b(auth-mac (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.8",
+                    "match": "\\b(auth-mac auth-user (hyphen|colon|unformatted) (lower-case|upper-case))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "entity.name.type"
+                        },
+                        "3": {
+                            "name": "entity.name.type"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.9",
+                    "match": "\\b(auth-mac static (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.10",
+                    "match": "\\b(auth-web (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.11",
+                    "match": "\\b(auth host-mode (single-host|multi-host|multi-supplicant))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.12",
+                    "match": "\\b(auth order (dot1x auth-mac|auth-mac dot1x))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.13",
+                    "match": "\\b(auth reauthentication)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "5.3.14",
+                    "match": "\\b(auth dynamic-vlan-creation)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "5.3.15",
+                    "match": "\\b(auth guest-vlan (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.16",
+                    "match": "\\b(auth timeout quiet-period (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.17",
+                    "match": "\\b(auth timeout reauth-period (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.18",
+                    "match": "\\b(auth timeout server-timeout (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.19",
+                    "match": "\\b(auth timeout supp-timeout (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.20",
+                    "match": "\\b(radius-server host (\\S+)( auth-port (\\d+))?( timeout (\\d+))?( retransmit (\\d+))?( key (\\S+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        },
+                        "6": {
+                            "name": "constant.numeric"
+                        },
+                        "8": {
+                            "name": "constant.numeric"
+                        },
+                        "10": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.21",
+                    "match": "\\b(radius-server timeout (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.22",
+                    "match": "\\b(radius-server retransmit (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.23",
+                    "match": "\\b(radius-server key (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.24",
+                    "match": "\\b(radius-server deadtime (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.25",
+                    "match": "\\b(auth radius attribute nas-identifier (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.31",
+                    "match": "\\b(auth-web redirect-url (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.33, 5.3.34",
+                    "match": "\\b(auth clear-state time (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.3.37",
+                    "match": "\\b(pass-through eap (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-5.4-portsec": {
+            "patterns": [
+                {
+                    "comment": "5.4.1",
+                    "match": "\\b(port-security (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.4.2",
+                    "match": "\\b(port-security mac-address (([0-9a-fA-F]{4}(\\.)){2}[0-9a-fA-F]{4}) (forward) (\\S+)( vlan (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "5": {
+                            "name": "keyword.control"
+                        },
+                        "6": {
+                            "name": "string"
+                        },
+                        "8": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "5.4.3",
+                    "match": "\\b(port-security violation (discard|shutdown))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-5.5-errdisable": {
+            "patterns": [
+                {
+                    "comment": "5.5.1",
+                    "match": "\\b(errdisable auto-recovery (bpduguard|loop-detect)( interval (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-6.1-fdb": {
+            "patterns": [
+                {
+                    "comment": "6.1.1",
+                    "match": "\\b(mac-address-table learning (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.1.2",
+                    "match": "\\b(mac-address-table ageing-time (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.1.3",
+                    "match": "\\b(mac-address-table static (([0-9a-fA-F]{4}(\\.)){2}[0-9a-fA-F]{4}) (forward|discard) (\\S+)( vlan (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "5": {
+                            "name": "keyword.control"
+                        },
+                        "6": {
+                            "name": "string"
+                        },
+                        "8": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
         "swx-6.2-vlan": {
             "patterns": [
                 {
@@ -1354,13 +2217,182 @@
         "swx-6.3-stp": {
             "patterns": [
                 {
+                    "comment": "6.3.1",
+                    "match": "\\b(no spanning-tree shutdown)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.3.2",
+                    "match": "\\b(spanning-tree forward-time (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.3",
+                    "match": "\\b(spanning-tree max-age (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.4",
+                    "match": "\\b(spanning-tree priority (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.5",
+                    "match": "\\b(spanning-tree (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.6",
+                    "match": "\\b(spanning-tree link-type (point-to-point|shared))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "entity.name.type"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.7",
+                    "match": "\\b(spanning-tree bpdu-filter (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.8",
+                    "match": "\\b(spanning-tree bpdu-guard (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.9",
+                    "match": "\\b(spanning-tree path-cost (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.10",
+                    "match": "\\b(spanning-tree priority (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.11",
+                    "match": "\\b(spanning-tree edgeport)\\b",
+                    "name": "entity.name.function"
+                },
+                {
                     "comment": "6.3.15",
                     "match": "\\b(spanning-tree mst configuration)\\b",
                     "name": "storage"
+                },
+                {
+                    "comment": "6.3.16, 6.3.17, 6.3.18",
+                    "match": "\\b(instance (1[0-5]|[1-9])( (vlan|priority) (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.19",
+                    "match": "\\b(region (\\S{1,32}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.20",
+                    "match": "\\b(revision (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.3.22, 6.3.23",
+                    "match": "\\b(spanning-tree instance (1[0-5]|[1-9])( (priority|path-cost) (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "5": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 }
             ]
         },
-        "swx-6.4-loop-detect": {},
+        "swx-6.4-loop-detect": {
+            "patterns": [
+                {
+                    "comment": "6.4.1, 6.4.2, 6.4.3",
+                    "match": "\\b(loop-detect( blocking)? (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "3": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.4.4",
+                    "match": "\\b(loop-detect blocking interval (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
         "swx-7.1-ipv4-addr": {
             "patterns": [
                 {
@@ -1431,8 +2463,54 @@
                 }
             ]
         },
-        "swx-7.3-arp": {},
-        "swx-7.4-ipv4-forward": {},
+        "swx-7.3-arp": {
+            "patterns": [
+                {
+                    "comment": "7.3.3",
+                    "match": "\\b(arp (((([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])) (([0-9a-fA-F]{4}(\\.)){2}[0-9a-fA-F]{4}) (port[1-2]\\.\\d+)))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.3.4",
+                    "match": "\\b(arp-ageing-timeout (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-7.4-ipv4-forward": {
+            "patterns": [
+                {
+                    "comment": "7.4.1",
+                    "match": "\\b(ip forwarding (enable|disable))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.4.3",
+                    "match": "\\b(ip directed-broadcast (enable|disable))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
         "swx-7.6-ipv6-addr": {
             "patterns": [
                 {
@@ -1462,9 +2540,54 @@
                 }
             ]
         },
-        "swx-7.7-ipv6-route": {},
-        "swx-7.8-ipv6-neighbor": {},
-        "swx-7.9-ipv6-forward": {},
+        "swx-7.7-ipv6-route": {
+            "patterns": [
+                {
+                    "comment": "7.7.1",
+                    "match": "\\b(ipv6 route (\\S+) (\\S+)( \\d+)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "14": {
+                            "name": "string"
+                        },
+                        "18": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-7.8-ipv6-neighbor": {
+            "patterns": [
+                {
+                    "comment": "7.8.1",
+                    "match": "\\b(ipv6 neighbor (\\S+ \\S+ \\S+))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-7.9-ipv6-forward": {
+            "patterns": [
+                {
+                    "comment": "7.9.1",
+                    "match": "\\b(ipv6 forwarding (enable|disable))\\b",
+                    "name": "support.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
         "swx-7.11-dns": {
             "patterns": [
                 {
@@ -1489,7 +2612,278 @@
                 }
             ]
         },
-        "swx-7.12-ospf": {},
+        "swx-7.12-ospf": {
+            "patterns": [
+                {
+                    "comment": "7.12.1",
+                    "match": "\\b(router ospf (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.2",
+                    "match": "\\b(router ipv6 ospf (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.3",
+                    "match": "\\b(area (\\S+) authentication( message-digest)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.4",
+                    "match": "\\b(area (\\S+) default-cost (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.5",
+                    "match": "\\b(area (\\S+) filter-list access (\\d+) (in|out))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        },
+                        "4": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.6, 7.12.9",
+                    "match": "\\b(area (\\S+) (nssa|virtual-link)(\\s\\S+)*)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "4": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.7",
+                    "match": "\\b(area (\\S+) range (\\S+)( (advertise|not-advertise))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "string"
+                        },
+                        "4": {
+                            "name": "entity.name.type"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.8",
+                    "match": "\\b(area (\\S+) stub( no-summary)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.10",
+                    "match": "\\b(auto-cost reference-bandwidth (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.11",
+                    "match": "\\b(capability opaque (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.12",
+                    "match": "\\b(compatible rfc1583)\\b",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "7.12.13",
+                    "match": "\\b(db-summary-opt (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.14",
+                    "match": "\\b(default-information originate( always)?( (metric) (\\d+))?( (metric-type) ([1-2]))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "4": {
+                            "name": "string"
+                        },
+                        "5": {
+                            "name": "constant.numeric"
+                        },
+                        "6": {
+                            "name": "string"
+                        },
+                        "8": {
+                            "name": "entity.name.type"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.16-2",
+                    "match": "\\b(distance ospf( intra-area (\\d+))?( inter-area (\\d+))?( external (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        },
+                        "4": {
+                            "name": "string"
+                        },
+                        "5": {
+                            "name": "constant.numeric"
+                        },
+                        "6": {
+                            "name": "string"
+                        },
+                        "7": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.18",
+                    "match": "\\b(host (\\S+) area (\\S+)( cost (\\d+))?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "string"
+                        },
+                        "5": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.19",
+                    "match": "\\b(max-concurrent-dd (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.20",
+                    "match": "\\b(network (\\S+) area (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.21",
+                    "match": "\\b(ospf router-id (\\S+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.22",
+                    "match": "\\b(overflow database (\\d+) (hard|soft)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.23",
+                    "match": "\\b(overflow database external (\\d+) (\\d+))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.24",
+                    "match": "\\b(passive-interface (\\S+) (disable)?)\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        },
+                        "3": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
         "swx-7.13-rip": {
             "patterns": [
                 {
@@ -1503,14 +2897,12 @@
                     "name": "storage"
                 },
                 {
-                    "comment": "7.13.3",
-                    "match": "\\b(default-information originate( always)?)\\b",
-                    "name": "support.function"
+                    "comment": "7.13.3, 7.12.4で定義"
                 },
                 {
-                    "comment": "7.13.4, 7.13.5",
+                    "comment": "7.13.4, 7.13.5, 7.12.15, 7.12.16-1",
                     "match": "\\b((default-metric|distance) (\\d+))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "3": {
                             "name": "constant.numeric"
@@ -1518,9 +2910,9 @@
                     }
                 },
                 {
-                    "comment": "7.13.6",
+                    "comment": "7.13.6, 7.12.17",
                     "match": "\\b(distribute-list (\\d+) (in|out)( \\S+)?)\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "constant.numeric"
@@ -1536,7 +2928,7 @@
                 {
                     "comment": "7.13.7",
                     "match": "\\b(neighbor (\\S+)( \\S+)?)\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "string"
@@ -1549,7 +2941,7 @@
                 {
                     "comment": "7.13.8",
                     "match": "\\b(network (\\S+))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "string"
@@ -1559,7 +2951,7 @@
                 {
                     "comment": "7.13.9",
                     "match": "\\b(offset-list (\\d+) (in|out) (\\d+)( \\S+)?)\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "constant.numeric"
@@ -1578,7 +2970,7 @@
                 {
                     "comment": "7.13.10",
                     "match": "\\b(passive-interface (\\S+))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "string"
@@ -1588,7 +2980,7 @@
                 {
                     "comment": "7.13.11",
                     "match": "\\b(redistribute (connected|ospf6|ospf|static)( metric (\\d+))?)\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "entity.name.type"
@@ -1601,7 +2993,7 @@
                 {
                     "comment": "7.13.12",
                     "match": "\\b(timers basic ((\\d+) (\\d+) (\\d+)))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "constant.numeric"
@@ -1611,7 +3003,7 @@
                 {
                     "comment": "7.13.13",
                     "match": "\\b(version ([1-2]))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "constant.numeric"
@@ -1621,7 +3013,7 @@
                 {
                     "comment": "7.13.14",
                     "match": "\\b(ip rip authentication key-chain((\\s\\S+)+))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "string"
@@ -1631,7 +3023,7 @@
                 {
                     "comment": "7.13.15",
                     "match": "\\b(ip rip authentication mode (text|md5))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "keyword.control"
@@ -1641,7 +3033,7 @@
                 {
                     "comment": "7.13.16",
                     "match": "\\b(ip rip authentication string (\\S+))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "string"
@@ -1651,7 +3043,7 @@
                 {
                     "comment": "7.13.17, 7.13.18, 7.13.20",
                     "match": "\\b(ip rip (metric-zero-accept|receive-packet|send-packet) (enable|disable))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "3": {
                             "name": "keyword.control"
@@ -1661,7 +3053,7 @@
                 {
                     "comment": "7.13.19",
                     "match": "\\b(ip rip receive version ([1-2]( [1-2])?))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "keyword.control"
@@ -1671,7 +3063,7 @@
                 {
                     "comment": "7.13.21",
                     "match": "\\b(ip rip send version( (1-compatible|[1-2]))?)\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "keyword.control"
@@ -1681,7 +3073,7 @@
                 {
                     "comment": "7.13.22, 7.13.23",
                     "match": "\\b(ip rip (split-horizon|poison-reverse) (enable|disable))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "3": {
                             "name": "keyword.control"
@@ -1691,7 +3083,7 @@
                 {
                     "comment": "7.13.24",
                     "match": "\\b(ipv6 rip metric-offset (\\d+))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "2": {
                             "name": "constant.numeric"
@@ -1701,7 +3093,7 @@
                 {
                     "comment": "7.13.25, 7.13.26",
                     "match": "\\b(ipv6 rip (split-horizon|poison-reverse) (enable|disable))\\b",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "3": {
                             "name": "keyword.control"
@@ -1711,7 +3103,7 @@
                 {
                     "comment": "7.13.27",
                     "match": "\\b(ipv6 router rip)\\b",
-                    "name": "support.function"
+                    "name": "entity.name.function"
                 }
             ]
         },

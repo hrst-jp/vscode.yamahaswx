@@ -31,6 +31,22 @@ router ospf
   ospf router-id 192.168.100.240
   network 192.168.0.0/16 area 0
   exit
+ip ospf authentication-key yamaha
+area 1 authentication message-digest
+area 1 range 203.0.113.0/24
+area 1 stub
+ area 1 stub no-summary
+  area 1 virtual-link 203.0.113.1
+   
+      default-information originate always
+      default-information originate always metric 10 metric-type 1
+       distance ospf intra-area 100 inter-area 120 external 140
+        host 203.0.113.1 area 11.1.1.213
+exit
+ network 203.0.113.0/24 area 0
+ network 172.16.0.0/16 
+interface vlan10
+ip ospf message-digest-key 1 md5 yamaha
 access-list 1 10 deny any any 192.168.40.0 0.0.0.255
 access-list 1 20 deny any any 192.168.50.0 0.0.0.255
 access-list 2 10 deny any any 192.168.30.0 0.0.0.255
@@ -350,6 +366,7 @@ snmp-server user admin1 admins auth sha passwd1234 priv aes passwd1234
 mail server smtp 1 host smtp-server-test2.com encrypt over-ssl auth test_user test_password
 
 
+arp 192.168.100.100 00a0.de00.0000 port1.1
 
 snapshot enable
 snapshot trap terminal except-wireless
@@ -365,3 +382,32 @@ event-watch disable
 event-watch interval 60
 terminal-watch interval 60
 wireless-terminal-watch interval 22
+
+loop-detect blocking interval 300
+
+loop-detect blocking disable
+instance 2 vlan 222444444444444
+instance 2 priority 4096
+instance 2 priority 4096
+spanning-tree instance 2
+spanning-tree instance 2
+spanning-tree instance 2 priority 16
+spanning-tree instance 2 path-cost 100000
+port-security violation shutdown
+auth-mac auth-user unformatted upper-case
+auth order auth-mac dot1x
+auth order dot1x auth-mac
+radius-server host 192.168.100.100 timeout 10 retransmit 5
+radius-server host 192.168.100.101 auth-port 1645 key abcde
+radius-server host 127.0.0.1 key secret_local
+schedule 2 time */mon -2,12-14,21-:0 1
+schedule 1 time */mon -2,12-14,21-:0 1
+schedule 1 event startup 2
+ptp transport protocol udp ipv6
+buzzer trigger startup fan 
+rmon history 1
+rmon history 2422 buckets 111 interval 333 owner etst
+snmp-server host 192.168.100.3 traps version 2c public
+snmp-server enable trap rmon
+rmon event 1 log-trap public
+end
