@@ -3,9 +3,8 @@
 !  Last Modified: Wed Nov 30 15:12:46 JST 2022
 !
 enable password (�p�X���[�h�F�K�{)
-!
 username (���[�U�[���F�K�{) privilege on password (�p�X���[�h�F�K�{)
-!
+password-encryption enable
 
 qos enable
 !
@@ -28,7 +27,7 @@ interface vlan1
   ip policy route-map 1
   exit
 router ospf
-  ospf router-id 192.168.100.240
+        ospf router-id 192.168.100.240
   network 192.168.0.0/16 area 0
   exit
 ip ospf authentication-key yamaha
@@ -421,3 +420,9 @@ authentication pap peap eap-md5 eap-tls eap-ttls
 user yamaha secretpassword mac 00a0.de00.0001 auth peap name YamahaTaro
 user userid password vlan 33 mac mac-address ssid ssid name name mail mail@address auth pap expire date
 user yamaha secretpassword
+
+redistribute connected metric 2222 metric-type 333 tag 3333
+summary-address 172.16.0.0/16 not-advertiseip mroute rrrr rip ggg 33
+ ip mroute sssss rip t33 3
+l2-unknown-mcast forward link-local ttt ttt
+ l2-unknown-mcast forward link-local ttt ttt
