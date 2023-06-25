@@ -212,6 +212,11 @@
         "keyword": {
             "patterns": [
                 {
+                    "match": "\\b(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(/(([1-2]?[0-9])|3[0-2]))?\\b",
+                    "name": "string",
+                    "comment": "IPv4 Address"
+                },
+                {
                     "match": "\\b([0-9a-f]{0,4}:){7}[0-9a-f]{0,4}(%\\S+|(/(12[0-8]|1([0-1]|[39]){2}|[1-9]?[0-9])))?\\b",
                     "name": "string",
                     "comment": "IPv6 Address省略なし"
@@ -230,6 +235,11 @@
                     "match": "\\b(([0-9a-fA-F]{2}(:|-)){5}[0-9a-fA-F]{2})\\b",
                     "name": "string",
                     "comment": "MACアドレス(HH:HH:HH:HH:HH:HH) or (HH-HH-HH-HH-HH-HH)"
+                },
+                {
+                    "match": "\\b(([0-9a-fA-F]{4}(\\.)){2}[0-9a-fA-F]{4})\\b",
+                    "name": "string",
+                    "comment": "MACアドレス(HHHH.HHHH.HHHH)"
                 },
                 {
                     "match": "\\b(([0-9a-fA-F]{4}(\\.)){2}[0-9a-fA-F]{4})\\b",
@@ -2734,7 +2744,7 @@
                     }
                 },
                 {
-                    "comment": "7.12.10",
+                    "comment": "7.12.10, 7.12.35",
                     "match": "^\\s*auto-cost reference-bandwidth (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -2759,7 +2769,7 @@
                     "name": "entity.name.function"
                 },
                 {
-                    "comment": "7.12.13",
+                    "comment": "7.12.13, 7.12.36",
                     "match": "^\\s*db-summary-opt (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -2769,54 +2779,81 @@
                     }
                 },
                 {
-                    "comment": "7.12.14",
-                    "match": "^\\s*default-information originate( always)?( (metric) (\\d+))?( (metric-type) ([1-2]))?",
+                    "comment": "7.12.14, 7.12.37",
+                    "begin": "^\\s*default-information originate",
+                    "end": "\\n",
                     "name": "entity.name.function",
-                    "captures": {
-                        "1": {
-                            "name": "string"
+                    "patterns": [
+                        {
+                            "match": "\\b(always)\\b",
+                            "name": "keyword.control"
                         },
-                        "3": {
-                            "name": "string"
+                        {
+                            "match": "\\b(metric (\\d{1,8}))\\b",
+                            "captures": {
+                                "2": {
+                                    "name": "constant.numeric"
+                                }
+                            }
                         },
-                        "4": {
-                            "name": "constant.numeric"
-                        },
-                        "5": {
-                            "name": "string"
-                        },
-                        "7": {
-                            "name": "entity.name.type"
+                        {
+                            "match": "\\b(metric-type (1|2))\\b",
+                            "captures": {
+                                "2": {
+                                    "name": "constant.numeric"
+                                }
+                            }
                         }
-                    }
+                    ]
                 },
                 {
-                    "comment": "7.12.16-2",
-                    "match": "^\\s*distance ospf( intra-area (\\d+))?( inter-area (\\d+))?( external (\\d+))?",
+                    "comment": "7.12.15, 7.13.4",
+                    "match": "^\\s*(default-metric) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
-                        "1": {
-                            "name": "string"
-                        },
                         "2": {
                             "name": "constant.numeric"
-                        },
-                        "3": {
-                            "name": "string"
-                        },
-                        "4": {
-                            "name": "constant.numeric"
-                        },
-                        "5": {
-                            "name": "string"
-                        },
-                        "6": {
-                            "name": "constant.numeric"
                         }
                     }
                 },
                 {
-                    "comment": "7.12.18",
+                    "comment": "7.12.16, 7.12.39, 7.13.5",
+                    "begin": "^\\s*distance",
+                    "end": "$",
+                    "name": "entity.name.function",
+                    "patterns": [
+                        {
+                            "match": "\\b(ospf3? (intra-area|inter-area|external))\\b",
+                            "captures": {
+                                "3": {
+                                    "name": "constant.numeric"
+                                }
+                            }
+                        },
+                        {
+                            "match": "\\b(\\d+)\\b",
+                            "name": "constant.numeric"
+                        }
+                    ]
+                },
+                {
+                    "comment": "7.13.6, 7.12.17",
+                    "match": "^\\s*distribute-list (\\d+) (in|out)( \\S+)?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        },
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.12.18, 7.12.41",
                     "match": "^\\s*host (\\S+) area (\\S+)( cost (\\d+))?",
                     "name": "entity.name.function",
                     "captures": {
@@ -2832,8 +2869,8 @@
                     }
                 },
                 {
-                    "comment": "7.12.19",
-                    "match": "^\\s*max-concurrent-dd (\\d+)",
+                    "comment": "7.12.19, 7.12.42",
+                    "match": "^\\s*max-concurrent-dd (\\d{1,5})",
                     "name": "entity.name.function",
                     "captures": {
                         "1": {
@@ -2891,7 +2928,7 @@
                     }
                 },
                 {
-                    "comment": "7.12.24",
+                    "comment": "7.12.24, 7.12.43, 7.13.10",
                     "match": "^\\s*passive-interface (\\S+) (disable)?",
                     "name": "entity.name.function",
                     "captures": {
@@ -2904,7 +2941,7 @@
                     }
                 },
                 {
-                    "comment": "7-12-25",
+                    "comment": "7.12.25, 7.12.44, 7.13.11",
                     "match": "^\\s*redistribute (connected|ospf( process_id)?|rip|static)( (metric-type|metric|tag) (\\d+))*",
                     "name": "entity.name.function",
                     "captures": {
@@ -2917,7 +2954,7 @@
                     }
                 },
                 {
-                    "comment": "7-12-26",
+                    "comment": "7.12.26, 7.12.46",
                     "match": "^\\s*summary-address (\\S+)( not-advertise)?( tag (\\d+))?",
                     "name": "entity.name.function",
                     "captures": {
@@ -2930,7 +2967,7 @@
                     }
                 },
                 {
-                    "comment": "7-12-27",
+                    "comment": "7.12.27",
                     "match": "^\\s*timers lsa arrival (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -2940,7 +2977,7 @@
                     }
                 },
                 {
-                    "comment": "7-12-28",
+                    "comment": "7.12.28",
                     "match": "^\\s*timers spf exp (\\d+) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -2953,7 +2990,7 @@
                     }
                 },
                 {
-                    "comment": "7-12-29",
+                    "comment": "7.12.29",
                     "match": "^\\s*timers throttle lsa all (\\d+) (\\d+) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -2969,7 +3006,7 @@
                     }
                 },
                 {
-                    "comment": "7-12-30",
+                    "comment": "7.12.30",
                     "match": "^\\s*area (\\S+) default-cost (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -2982,7 +3019,7 @@
                     }
                 },
                 {
-                    "comment": "7-12-31",
+                    "comment": "7.12.31",
                     "match": "^\\s*area (\\S+) nssa",
                     "name": "entity.name.function",
                     "captures": {
@@ -2992,7 +3029,7 @@
                     }
                 },
                 {
-                    "comment": "7-12-32",
+                    "comment": "7.12.32",
                     "match": "^\\s*area (\\S+) range (\\S+)( (advertise|not-advertise))?",
                     "name": "entity.name.function",
                     "captures": {
@@ -3005,7 +3042,7 @@
                     }
                 },
                 {
-                    "comment": "7-12-33",
+                    "comment": "7.12.33",
                     "match": "^\\s*area (\\S+) stub( mo-summary)?",
                     "name": "entity.name.function",
                     "captures": {
@@ -3015,7 +3052,7 @@
                     }
                 },
                 {
-                    "comment": "7-12-34",
+                    "comment": "7.12.34",
                     "match": "^\\s*area (\\S+) virtual-link (\\S+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -3028,94 +3065,233 @@
                     }
                 },
                 {
-                    "comment": "7-12-35"
+                    "comment": "7.12.45",
+                    "match": "^\\s*router-id (\\S+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-36"
+                    "comment": "7.12.47, 7.12.48",
+                    "match": "^\\s*ip ospf( \\S+)? authentication( null| message-digest|(-key) (\\S+))?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        },
+                        "2": {
+                            "name": "entity.name.type"
+                        },
+                        "3": {
+                            "name": "entity.name.function"
+                        },
+                        "4": {
+                            "name": "string"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-37"
+                    "comment": "7.12.49",
+                    "match": "^\\s*ip ospf( \\S+)? cost (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        },
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-38"
+                    "comment": "7.12.50",
+                    "match": "^\\s*ip ospf( \\S+)? database-filter all out",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-39"
+                    "comment": "7.12.51",
+                    "match": "^\\s*ip ospf( \\S+)? dead-interval (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        },
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-40"
+                    "comment": "7.12.52",
+                    "match": "^\\s*ip ospf disable all",
+                    "name": "entity.name.function"
                 },
                 {
-                    "comment": "7-12-41"
+                    "comment": "7.12.53",
+                    "match": "^\\s*ip ospf( \\S+)? hello-interval (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        },
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-42"
+                    "comment": "7.12.54",
+                    "match": "^\\s*ip ospf( \\S+)? message-digest-key (\\d+) md5 (\\S+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        },
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-43"
+                    "comment": "7.12.55",
+                    "match": "^\\s*ip ospf priority (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-44"
+                    "comment": "7.12.56",
+                    "match": "^\\s*ip ospf( \\S+)? retransmit-interval (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        },
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-45"
+                    "comment": "7.12.57",
+                    "match": "^\\s*ip ospf( \\S+)? transmit-delay (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        },
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-46"
+                    "comment": "7.12.58",
+                    "match": "^\\s*ipv6 ospf cost (\\d+)( instance-id (\\d+))?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-47"
+                    "comment": "7.12.59",
+                    "match": "^\\s*ipv6 ospf dead-interval (\\d+)( instance-id (\\d+))?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-48"
+                    "comment": "7.12.60",
+                    "match": "^\\s*ipv6 ospf hello-interval (\\d+)( instance-id (\\d+))?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-49"
+                    "comment": "7.12.61",
+                    "match": "^\\s*ipv6 ospf priority (\\d+)( instance-id (\\d+))?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-50"
+                    "comment": "7.12.62",
+                    "match": "^\\s*ipv6 ospf retransmit-interval (\\d+)( instance-id (\\d+))?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-51"
+                    "comment": "7.12.63",
+                    "match": "^\\s*ipv6 router ospf area (\\d+)( instance-id (\\d+))?( tag (\\d+))?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        },
+                        "5": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 },
                 {
-                    "comment": "7-12-52"
-                },
-                {
-                    "comment": "7-12-53"
-                },
-                {
-                    "comment": "7-12-54"
-                },
-                {
-                    "comment": "7-12-55"
-                },
-                {
-                    "comment": "7-12-56"
-                },
-                {
-                    "comment": "7-12-57"
-                },
-                {
-                    "comment": "7-12-58"
-                },
-                {
-                    "comment": "7-12-59"
-                },
-                {
-                    "comment": "7-12-60"
-                },
-                {
-                    "comment": "7-12-61"
-                },
-                {
-                    "comment": "7-12-62"
-                },
-                {
-                    "comment": "7-12-63"
-                },
-                {
-                    "comment": "7-12-64"
+                    "comment": "7.12.64",
+                    "match": "^\\s*ipv6 ospf transmit-delay (\\d+)( instance-id (\\d+))?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 }
             ]
         },
@@ -3133,32 +3309,6 @@
                 },
                 {
                     "comment": "7.13.3, 7.12.4で定義"
-                },
-                {
-                    "comment": "7.13.4, 7.13.5, 7.12.15, 7.12.16-1",
-                    "match": "^\\s*(default-metric|distance) (\\d+)",
-                    "name": "entity.name.function",
-                    "captures": {
-                        "2": {
-                            "name": "constant.numeric"
-                        }
-                    }
-                },
-                {
-                    "comment": "7.13.6, 7.12.17",
-                    "match": "^\\s*distribute-list (\\d+) (in|out)( \\S+)?",
-                    "name": "entity.name.function",
-                    "captures": {
-                        "1": {
-                            "name": "constant.numeric"
-                        },
-                        "2": {
-                            "name": "keyword.control"
-                        },
-                        "3": {
-                            "name": "string"
-                        }
-                    }
                 },
                 {
                     "comment": "7.13.7",
@@ -3199,29 +3349,6 @@
                         },
                         "4": {
                             "name": "string"
-                        }
-                    }
-                },
-                {
-                    "comment": "7.13.10",
-                    "match": "^\\s*passive-interface (\\S+)",
-                    "name": "entity.name.function",
-                    "captures": {
-                        "2": {
-                            "name": "string"
-                        }
-                    }
-                },
-                {
-                    "comment": "7.13.11",
-                    "match": "^\\s*redistribute (connected|ospf6|ospf|static)( metric (\\d+))?",
-                    "name": "entity.name.function",
-                    "captures": {
-                        "1": {
-                            "name": "entity.name.type"
-                        },
-                        "3": {
-                            "name": "constant.numeric"
                         }
                     }
                 },
@@ -3339,14 +3466,105 @@
                     "comment": "7.13.27",
                     "match": "^\\s*ipv6 router rip",
                     "name": "entity.name.function"
+                },
+                {
+                    "comment": "7.13.32",
+                    "match": "^\\s*send-lifetime (\\d+:\\d+:\\d+ \\d+ (jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec) \\d{4}) ((\\d+:\\d+:\\d+ \\d+ (jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec) \\d{4})|(\\d+)|(infinite))",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        },
+                        "4": {
+                            "name": "constant.numeric"
+                        },
+                        "6": {
+                            "name": "constant.numeric"
+                        },
+                        "7": {
+                            "name": "string"
+                        }
+                    }
                 }
             ]
         },
         "swx-7.14-vrrp": {
             "patterns": [
                 {
-                    "match": "^\\s*router vrrp (\\d+) (\\S+)",
-                    "name": "storage"
+                    "comment": "7.14.1, 7.14.2",
+                    "match": "^\\s*router( ipv6)? vrrp (\\d+) (\\S+)",
+                    "name": "storage",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        },
+                        "3": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.14.3",
+                    "match": "^\\s*advertisement-interval (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.14.4",
+                    "match": "^\\s*circuit-failover (\\S+) (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        },
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.14.5",
+                    "match": "^\\s*virtual-router (enable|disable)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.14.6",
+                    "match": "^\\s*preempt-mode (enable|disable)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.14.7",
+                    "match": "^\\s*priority (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.14.8, 7.14.9",
+                    "match": "^\\s*virtual-ip(v6)? (\\S+)( owner)?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
                 }
             ]
         },
@@ -4106,7 +4324,7 @@
         "swx-9.1-acl": {
             "patterns": [
                 {
-                    "comment": "9.1.1",
+                    "comment": "9.1.1, 9.1.4, 9.1.7",
                     "match": "^\\s*access-list (\\d{1,4}) (\\d{1,5}) (deny|permit)",
                     "name": "entity.name.function",
                     "captures": {
@@ -4122,12 +4340,12 @@
                     }
                 },
                 {
-                    "comment": "9.1.2",
+                    "comment": "9.1.2, 9.1.5, 9.1.8",
                     "match": "^\\s*access-list \\d{1,4} description (\\S{1,32})",
                     "name": "comment.line"
                 },
                 {
-                    "comment": "9.1.3",
+                    "comment": "9.1.3, 9.1.6, 9.1.9",
                     "match": "^\\s*access-group (\\d{1,4}) (in|out)",
                     "name": "entity.name.function",
                     "captures": {
@@ -4653,7 +4871,7 @@
                     }
                 },
                 {
-                    "comment": "10.3.4",
+                    "comment": "10.3.6",
                     "match": "^\\s*dns-forwarding static-host (\\S+ (((2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9]?[0-9])))( \\d+)?",
                     "name": "entity.name.function",
                     "captures": {
@@ -4732,37 +4950,52 @@
                 },
                 {
                     "comment": "10.4.7",
-                    "match": "^\\s*user (\\S+) (\\S+)( (vlan (\\d+)|mac (\\S+)|ssid (\\S+)|name (\\S+)|mail (\\S+)|expire (\\S+)|auth (\\S+))){0,7}",
+                    "begin": "^\\s*user (\\S+ \\S+)",
+                    "end": "$",
                     "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "string"
-                        },
-                        "2": {
-                            "name": "string"
-                        },
-                        "5": {
-                            "name": "constant.numeric"
-                        },
-                        "6": {
-                            "name": "string"
-                        },
-                        "7": {
-                            "name": "string"
-                        },
-                        "8": {
-                            "name": "string"
-                        },
-                        "9": {
-                            "name": "string"
-                        },
-                        "10": {
-                            "name": "string"
-                        },
-                        "11": {
-                            "name": "string"
                         }
-                    }
+                    },
+                    "patterns": [
+                        {
+                            "match": "\\b(vlan (\\d+))\\b",
+                            "name": "entity.name.function",
+                            "captures": {
+                                "2": {
+                                    "name": "constant.numeric"
+                                }
+                            }
+                        },
+                        {
+                            "match": "\\b((mac|ssid|name|mail|auth) (\\S+))\\b",
+                            "name": "entity.name.function",
+                            "captures": {
+                                "2": {
+                                    "name": "string"
+                                }
+                            }
+                        },
+                        {
+                            "match": "\\b(auth (pap|peap|eap-tls))\\b",
+                            "name": "entity.name.function",
+                            "captures": {
+                                "2": {
+                                    "name": "entity.name.type"
+                                }
+                            }
+                        },
+                        {
+                            "match": "\\b(expire (\\d{4}/\\d{2}/\\d{2}))\\b",
+                            "name": "entity.name.function",
+                            "captures": {
+                                "2": {
+                                    "name": "constant.numeric"
+                                }
+                            }
+                        }
+                    ]
                 },
                 {
                     "comment": "10.4.8",

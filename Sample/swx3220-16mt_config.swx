@@ -22,6 +22,8 @@ route-map 1 permit 10
   match access-list 1
   set ip next-hop 192.168.100.200
   exit
+arp 192.168.100.100 00a0.de00.0000 port1.1
+
 
 interface vlan1
   ip policy route-map 1
@@ -317,6 +319,7 @@ maximum-paths 9
 maximum-paths 1
 maximum-paths 8
 
+virtual-ipv6 fe80::10:1 owner
 
 
 clock timezone JST
@@ -418,7 +421,7 @@ end
 storm-control broadcast multicast level 30
 authentication pap peap eap-md5 eap-tls eap-ttls
 user yamaha secretpassword mac 00a0.de00.0001 auth peap name YamahaTaro
-user userid password vlan 33 mac mac-address ssid ssid name name mail mail@address auth pap expire date
+user userid password vlan 33 mac mac-address ssid ssid name name mail mail@address auth pap expire 1924/02/02
 user yamaha secretpassword
 
 redistribute connected metric 2222 metric-type 333 tag 3333
@@ -426,3 +429,14 @@ summary-address 172.16.0.0/16 not-advertiseip mroute rrrr rip ggg 33
  ip mroute sssss rip t33 3
 l2-unknown-mcast forward link-local ttt ttt
  l2-unknown-mcast forward link-local ttt ttt
+ default-information originate always metric 10 metric-type 1
+ db-summary-opt enable
+ distance 3344
+ distance ospf intra-area 33
+ ip ospf [ip_address] authentication null
+ ip ospf authentication 
+ ip ospf authentication-key yamaha
+  send-lifetime 12:0:0 1 apr 2020 11:59:59 31 mar 2025
+ send-lifetime 12:0:0 1 apr 2020 500000
+ send-lifetime 12:0:0 1 apr 2020 infinite
+ 
