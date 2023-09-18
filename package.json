@@ -2,7 +2,7 @@
   "name": "yamaha-swx",
   "displayName": "YAMAHA SWX series",
   "description": "Highlight the configuration file of YAMAHA SWX series",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "publisher": "hrst",
   "icon": "images/swx3220_16mt_icon.png",
   "engines": {

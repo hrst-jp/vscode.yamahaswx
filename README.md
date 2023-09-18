@@ -15,6 +15,11 @@ show startup-config または show running-config で表示された結果を
 SWX3220-16MT/SWX3220-16TMs  
 そのた類似コマンドの対象製品
 
+#その他シリーズ
+* [YAMAHA Router series](https://marketplace.visualstudio.com/items?itemName=hrst.yamaha-rt)
+* [YAMAHA SWX series](https://marketplace.visualstudio.com/items?itemName=hrst.yamaha-swx)
+* [YAMAHA WLX series](https://marketplace.visualstudio.com/items?itemName=hrst.yamaha-wlx)
+
 # 参考資料
 * [ヤマハネットワーク製品](https://network.yamaha.com/)
 * [ヤマハネットワーク周辺機器技術情報](http://www.rtpro.yamaha.co.jp/)
