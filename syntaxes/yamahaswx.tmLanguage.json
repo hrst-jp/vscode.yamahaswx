@@ -63,28 +63,31 @@
             "include": "#swx-4.22-mail"
         },
         {
+            "include": "#swx-4.23-y-unos"
+        },
+        {
             "include": "#swx-4.23-lldp"
         },
         {
-            "include": "#swx-4.24-l2ms"
+            "include": "#swx-4.25-l2ms"
         },
         {
-            "include": "#swx-4.25-snapshot"
+            "include": "#swx-4.26-snapshot"
         },
         {
-            "include": "#swx-4.26-firmup"
+            "include": "#swx-4.27-firmup"
         },
         {
-            "include": "#swx-4.27-stack"
+            "include": "#swx-4.28-stack"
         },
         {
-            "include": "#swx-4.28-schedule"
+            "include": "#swx-4.29-schedule"
         },
         {
-            "include": "#swx-4.29-buzzer"
+            "include": "#swx-4.30-buzzer"
         },
         {
-            "include": "#swx-4.30-general"
+            "include": "#swx-4.31-general"
         },
         {
             "include": "#swx-5.1-interface"
@@ -112,6 +115,9 @@
         },
         {
             "include": "#swx-6.4-loop-detect"
+        },
+        {
+            "include": "#swx-6.5-dhcp-snoop"
         },
         {
             "include": "#swx-7.1-ipv4-addr"
@@ -206,6 +212,15 @@
                 {
                     "match": "description .*",
                     "name": "comment.line"
+                },
+                {
+                    "match": "^\\s*no (.*)",
+                    "name": "keyword.control",
+                    "captures": {
+                        "1": {
+                            "name": "comment.line"
+                        }
+                    }
                 }
             ]
         },
@@ -250,6 +265,21 @@
                     "match": "\\b(\\d+)\\b",
                     "name": "constant.numeric",
                     "comment": "数字"
+                },
+                {
+                    "match": "\\b(port(1|2)\\.\\d+|sa\\d+|po\\d+|vlan\\d+)\\b",
+                    "name": "string",
+                    "comment": "インターフェース名"
+                },
+                {
+                    "match": "\\b(ack|fin|psh|rst|syn|utg|any|tcp|udp|host)\\b",
+                    "name": "string",
+                    "comment": "その他"
+                },
+                {
+                    "match": "\\b(eq|range)\\b",
+                    "name": "keyword.operator",
+                    "comment": "その他"
                 }
             ]
         },
@@ -1159,15 +1189,34 @@
                 }
             ]
         },
-        "swx-4.23-lldp": {
+        "swx-2.23-y-unos": {
             "patterns": [
                 {
-                    "comment": "4.23.1, 4.23.4",
+                    "comment": "4.23.1",
+                    "match": "^\\s*y-unos (enable|disable)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.23.2",
+                    "match": "^\\s*show y-unos",
+                    "name": "storage"
+                }
+            ]
+        },
+        "swx-4.24-lldp": {
+            "patterns": [
+                {
+                    "comment": "4.24.1, 4.24.4",
                     "match": "^\\s*lldp run|lldp-agent",
                     "name": "entity.name.function"
                 },
                 {
-                    "comment": "4.23.2, 4.23.3",
+                    "comment": "4.24.2, 4.24.3",
                     "match": "^\\s*lldp (system-description|system-name) (\\S{1,255})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1177,7 +1226,7 @@
                     }
                 },
                 {
-                    "comment": "4.23.5",
+                    "comment": "4.24.5",
                     "match": "^\\s*lldp auto-setting (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1187,7 +1236,7 @@
                     }
                 },
                 {
-                    "comment": "4.23.6",
+                    "comment": "4.24.6",
                     "match": "^\\s*set lldp enable (rxonly|txonly|txrx)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1197,7 +1246,7 @@
                     }
                 },
                 {
-                    "comment": "4.23.7",
+                    "comment": "4.24.7",
                     "match": "^\\s*set management-address-tlv (ip-address|mac-address)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1207,12 +1256,12 @@
                     }
                 },
                 {
-                    "comment": "4.23.8, 4.23.9, 4.23.10, 4.23.11",
+                    "comment": "4.24.8, 4.24.9, 4.24.10, 4.24.11",
                     "match": "^\\s*tlv-select (basic-mgmt|ieee-8021-org-specific|ieee-8023-org-specific|med)",
                     "name": "entity.name.function"
                 },
                 {
-                    "comment": "4.23.12, 4.23.13, 4.23.14",
+                    "comment": "4.24.12, 4.24.13, 4.24.14",
                     "match": "^\\s*set timer (msg-tx-interval|msg-fast-tx|reinit-delay) (\\d{1,4})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1222,7 +1271,7 @@
                     }
                 },
                 {
-                    "comment": "4.23.15, 4.23.16",
+                    "comment": "4.24.15, 4.24.16",
                     "match": "^\\s*set (msg-tx-hold|tx-fast-init) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1232,7 +1281,7 @@
                     }
                 },
                 {
-                    "comment": "4.23.17",
+                    "comment": "4.24.17",
                     "match": "^\\s*set too-many-neighbors limit (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1242,7 +1291,7 @@
                     }
                 },
                 {
-                    "comment": "4.23.18",
+                    "comment": "4.24.18",
                     "match": "^\\s*lldp interface enable (rxonly|txonly|txrx)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1253,15 +1302,15 @@
                 }
             ]
         },
-        "swx-4.24-l2ms": {
+        "swx-4.25-l2ms": {
             "patterns": [
                 {
-                    "comment": "4.24.1",
+                    "comment": "4.25.1",
                     "match": "^\\s*l2ms configuration",
                     "name": "storage"
                 },
                 {
-                    "comment": "4.24.2, 4.24.6, 4.24.8, 4.24.13, 4.24.15",
+                    "comment": "4.25.2, 4.25.6, 4.25.8, 4.25.13, 4.25.15",
                     "match": "^\\s*(l2ms( filter)?|(event|terminal)-watch|config-auto-set) (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1271,7 +1320,7 @@
                     }
                 },
                 {
-                    "comment": "4.24.3",
+                    "comment": "4.25.3",
                     "match": "^\\s*l2ms role (manager|agent)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1281,7 +1330,7 @@
                     }
                 },
                 {
-                    "comment": "4.24.4, 4.24.5",
+                    "comment": "4.25.4, 4.25.5",
                     "match": "^\\s*agent-watch (interval|down-count) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1291,7 +1340,7 @@
                     }
                 },
                 {
-                    "comment": "4.24.7, 4.24.12, 4.24.14",
+                    "comment": "4.25.7, 4.25.12, 4.25.14",
                     "match": "^\\s*((wireless-)?terminal|event)-watch interval (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1302,10 +1351,10 @@
                 }
             ]
         },
-        "swx-4.25-snapshot": {
+        "swx-4.26-snapshot": {
             "patterns": [
                 {
-                    "comment": "4.25.1",
+                    "comment": "4.26.1",
                     "match": "^\\s*snapshot (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1315,7 +1364,7 @@
                     }
                 },
                 {
-                    "comment": "4.25.1",
+                    "comment": "4.26.1",
                     "match": "^\\s*snapshot trap terminal( except-wireless)?",
                     "name": "entity.name.function",
                     "captures": {
@@ -1326,10 +1375,10 @@
                 }
             ]
         },
-        "swx-4.26-firmup": {
+        "swx-4.27-firmup": {
             "patterns": [
                 {
-                    "comment": "4.26.1",
+                    "comment": "4.27.1",
                     "match": "^\\s*firmware-update url (\\S{1,255})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1339,7 +1388,7 @@
                     }
                 },
                 {
-                    "comment": "4.26.2",
+                    "comment": "4.27.2",
                     "match": "^\\s*firmware-update http-proxy (\\S+) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1352,7 +1401,7 @@
                     }
                 },
                 {
-                    "comment": "4.26.4",
+                    "comment": "4.27.4",
                     "match": "^\\s*firmware-update timeout (\\d{3,5})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1362,7 +1411,7 @@
                     }
                 },
                 {
-                    "comment": "4.26.4",
+                    "comment": "4.27.4",
                     "match": "^\\s*firmware-update revision-down (enable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1372,7 +1421,7 @@
                     }
                 },
                 {
-                    "comment": "4.26.8",
+                    "comment": "4.27.8",
                     "match": "^\\s*firmware-update reload-time ((\\d+)( \\d+)?)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1382,7 +1431,7 @@
                     }
                 },
                 {
-                    "comment": "4.26.9",
+                    "comment": "4.27.9",
                     "match": "^\\s*firmware-update reload-method (normal|sequential)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1393,10 +1442,10 @@
                 }
             ]
         },
-        "swx-4.27-stack": {
+        "swx-4.28-stack": {
             "patterns": [
                 {
-                    "comment": "4.27.1",
+                    "comment": "4.28.1",
                     "match": "^\\s*stack (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1406,7 +1455,7 @@
                     }
                 },
                 {
-                    "comment": "4.27.2",
+                    "comment": "4.28.2",
                     "match": "^\\s*stack (1|2) renumber (1|2)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1419,7 +1468,7 @@
                     }
                 },
                 {
-                    "comment": "4.27.3",
+                    "comment": "4.28.3",
                     "match": "^\\s*stack subnet (auto-ip|(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}0)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1430,10 +1479,10 @@
                 }
             ]
         },
-        "swx-4.28-schedule": {
+        "swx-4.29-schedule": {
             "patterns": [
                 {
-                    "comment": "4.28.1",
+                    "comment": "4.29.1",
                     "match": "^\\s*schedule( \\d+)? (time \\S+ \\S+|event (startup|sd-attached)) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1446,7 +1495,7 @@
                     }
                 },
                 {
-                    "comment": "4.28.3",
+                    "comment": "4.29.3",
                     "match": "^\\s*action (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1456,7 +1505,7 @@
                     }
                 },
                 {
-                    "comment": "4.28.4",
+                    "comment": "4.29.4",
                     "match": "^\\s*schedule template (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1466,7 +1515,7 @@
                     }
                 },
                 {
-                    "comment": "4.28.5",
+                    "comment": "4.29.5",
                     "match": "^\\s*cli-command (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1476,7 +1525,7 @@
                     }
                 },
                 {
-                    "comment": "4.28.6",
+                    "comment": "4.29.6",
                     "match": "^\\s*script (sd)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1487,10 +1536,10 @@
                 }
             ]
         },
-        "swx-4.29-buzzer": {
+        "swx-4.30-buzzer": {
             "patterns": [
                 {
-                    "comment": "4.29.1",
+                    "comment": "4.30.1",
                     "match": "^\\s*buzzer (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1500,7 +1549,7 @@
                     }
                 },
                 {
-                    "comment": "4.29.2",
+                    "comment": "4.30.2",
                     "match": "^\\s*buzzer trigger(( (temperature|fan|loop|spf|startup|sd|all))+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1511,10 +1560,10 @@
                 }
             ]
         },
-        "swx-4.30-general": {
+        "swx-4.31-general": {
             "patterns": [
                 {
-                    "comment": "4.30.1",
+                    "comment": "4.31.1",
                     "match": "^\\s*hostname (\\S{,63})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1524,7 +1573,7 @@
                     }
                 },
                 {
-                    "comment": "4.30.6",
+                    "comment": "4.31.6",
                     "match": "^\\s*led-mode default (link-act|off)",
                     "name": "entity.name.function",
                     "captures": {
@@ -2419,6 +2468,110 @@
                 }
             ]
         },
+        "swx-6.5-dhcp-snoop": {
+            "patterns": [
+                {
+                    "comment": "6.5.1, 6.5.2",
+                    "match": "^\\s*ip dhcp snooping (enable|disable)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.5.3",
+                    "match": "^\\s*ip dhcp snooping trust",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.4",
+                    "match": "^\\s*ip dhcp snooping verify mac-address (enable|disable)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.5.5",
+                    "match": "^\\s*ip dhcp snooping information option (enable|disable)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.5.6",
+                    "match": "^\\s*ip dhcp snooping information option allow-untrusted",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.7",
+                    "match": "^\\s*ip dhcp snooping information option format remote-id (string|hostname)",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.8",
+                    "match": "^\\s*ip dhcp snooping information option format-type circuit-id (vlan-port|string|vlan-ifindex)",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.9",
+                    "match": "^\\s*ip dhcp snooping subscriber-id",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.10",
+                    "match": "^\\s*ip dhcp snooping limit rate",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.11",
+                    "match": "^\\s*ip dhcp snooping logging (enable|disable)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "6.5.12",
+                    "match": "^\\s*show ip dhcp snooping\\n",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.13",
+                    "match": "^\\s*show ip dhcp snooping interface",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.14",
+                    "match": "^\\s*show ip dhcp snooping binding",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.15",
+                    "match": "^\\s*show ip dhcp snooping statistics",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.16",
+                    "match": "^\\s*clear ip dhcp snooping binding",
+                    "name": "entity.name.function"
+                },
+                {
+                    "comment": "6.5.17",
+                    "match": "^\\s*clear ip dhcp snooping statistics",
+                    "name": "entity.name.function"
+                }
+            ]
+        },
         "swx-7.1-ipv4-addr": {
             "patterns": [
                 {
@@ -2510,6 +2663,16 @@
                             "name": "constant.numeric"
                         }
                     }
+                },
+                {
+                    "comment": "7.3.5",
+                    "match": "^\\s*arp-ageing-timeout request (unicast|broadcast)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
                 }
             ]
         },
@@ -2532,6 +2695,16 @@
                     "captures": {
                         "1": {
                             "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.4.4",
+                    "match": "^\\s*mtu (\\d+)",
+                    "name": "support.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
                         }
                     }
                 }
@@ -3582,7 +3755,7 @@
                     }
                 },
                 {
-                    "comment": "4.25.3",
+                    "comment": "4.26.3",
                     "match": "^\\s*match access-list (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -3592,7 +3765,7 @@
                     }
                 },
                 {
-                    "comment": "4.25.4",
+                    "comment": "4.26.4",
                     "match": "^\\s*set ip next-hop (\\S+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -3602,7 +3775,7 @@
                     }
                 },
                 {
-                    "comment": "4.25.5",
+                    "comment": "4.26.5",
                     "match": "^\\s*set ipv6 next-hop (\\S+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -3612,12 +3785,12 @@
                     }
                 },
                 {
-                    "comment": "4.25.6",
+                    "comment": "4.26.6",
                     "match": "^\\s*set interface null",
                     "name": "entity.name.function"
                 },
                 {
-                    "comment": "4.25.7",
+                    "comment": "4.26.7",
                     "match": "^\\s*ip policy route-map (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -3627,7 +3800,7 @@
                     }
                 },
                 {
-                    "comment": "4.25.8",
+                    "comment": "4.26.8",
                     "match": "^\\s*ipv6 policy route-map (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -3709,6 +3882,16 @@
                 },
                 {
                     "comment": "8.1.10",
+                    "match": "^\\s*l2-unknown-mcast (discard|flood)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "8.1.10 廃止",
                     "match": "^\\s*l2-unknown-mcast forward( link-local)?( \\S+ \\S+)?",
                     "name": "entity.name.function",
                     "captures": {
@@ -3729,6 +3912,11 @@
                             "name": "constant.numeric"
                         }
                     }
+                },
+                {
+                    "comment": "8.1.12",
+                    "match": "^\\s*l2-mcast flood",
+                    "name": "entity.name.function"
                 }
             ]
         },
