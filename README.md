@@ -22,9 +22,9 @@ SWX3220-16MT/SWX3220-16TMs
 
 # 参考資料
 * [ヤマハネットワーク製品](https://network.yamaha.com/)
-* [ヤマハネットワーク周辺機器技術情報](http://www.rtpro.yamaha.co.jp/)
-* [ヤマハスイッチ製品技術情報](http://www.rtpro.yamaha.co.jp/SW/)
-* [マニュアル](http://www.rtpro.yamaha.co.jp/RT/manual.html)
+* [ヤマハネットワーク周辺機器技術情報](https://www.rtpro.yamaha.co.jp/)
+* [ヤマハスイッチ製品技術情報](https://www.rtpro.yamaha.co.jp/SW/)
+* [マニュアル](https://www.rtpro.yamaha.co.jp/RT/manual.html)
 
 # ソース
 * [GitHub](https://github.com/hrst-jp/vscode.yamahaswx)

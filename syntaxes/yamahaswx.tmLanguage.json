@@ -9,193 +9,198 @@
             "include": "#swx-conf-mode"
         },
         {
-            "include": "#swx-4.1-password"
+            "include": "#swx-password"
         },
         {
-            "include": "#swx-4.2-user"
+            "include": "#swx-user"
         },
         {
-            "include": "#swx-4.4-bootinfo"
+            "include": "#swx-bootinfo"
         },
         {
-            "include": "#swx-4.8-clock"
+            "include": "#swx-clock"
         },
         {
-            "include": "#swx-4.9-ptp"
+            "include": "#swx-ptp"
         },
         {
-            "include": "#swx-4.10-terminal"
+            "include": "#swx-terminal"
         },
         {
-            "include": "#swx-4.11-management"
+            "include": "#swx-management"
         },
         {
-            "include": "#swx-4.12-syslog"
+            "include": "#swx-syslog"
         },
         {
-            "include": "#swx-4.13-snmp"
+            "include": "#swx-snmp"
         },
         {
-            "include": "#swx-4.14-rmon"
+            "include": "#swx-rmon"
+        }, {
+            "include": "#swx-sflow"
         },
         {
-            "include": "#swx-4.15-telnet-server"
+            "include": "#swx-telnet-server"
         },
         {
-            "include": "#swx-4.16-telnet-client"
+            "include": "#swx-telnet-client"
         },
         {
-            "include": "#swx-4.17-tftp-server"
+            "include": "#swx-tftp-server"
         },
         {
-            "include": "#swx-4.18-http-server"
+            "include": "#swx-http-server"
         },
         {
-            "include": "#swx-4.19-http-proxy"
+            "include": "#swx-http-proxy"
         },
         {
-            "include": "#swx-4.20-ssh-server"
+            "include": "#swx-ssh-server"
         },
         {
-            "include": "#swx-4.21-ssh-client"
+            "include": "#swx-ssh-client"
         },
         {
-            "include": "#swx-4.22-mail"
+            "include": "#swx-mail"
         },
         {
-            "include": "#swx-4.23-y-unos"
+            "include": "#swx-y-unos"
         },
         {
-            "include": "#swx-4.23-lldp"
+            "include": "#swx-lldp"
         },
         {
-            "include": "#swx-4.25-l2ms"
+            "include": "#swx-l2ms"
         },
         {
-            "include": "#swx-4.26-snapshot"
+            "include": "#swx-snapshot"
         },
         {
-            "include": "#swx-4.27-firmup"
+            "include": "#swx-firmup"
         },
         {
-            "include": "#swx-4.28-stack"
+            "include": "#swx-stack"
         },
         {
-            "include": "#swx-4.29-schedule"
+            "include": "#swx-schedule"
         },
         {
-            "include": "#swx-4.30-buzzer"
+            "include": "#swx-buzzer"
         },
         {
-            "include": "#swx-4.31-general"
+            "include": "#swx-general"
         },
         {
-            "include": "#swx-5.1-interface"
+            "include": "#swx-interface"
         },
         {
-            "include": "#swx-5.2-lag"
+            "include": "#swx-lag"
         },
         {
-            "include": "#swx-5.3-auth"
+            "include": "#swx-auth"
         },
         {
-            "include": "#swx-5.4-portsec"
+            "include": "#swx-portsec"
         },
         {
-            "include": "#swx-5.5-errdisable"
+            "include": "#swx-errdisable"
         },
         {
-            "include": "#swx-6.1-fdb"
+            "include": "#swx-fdb"
         },
         {
-            "include": "#swx-6.2-vlan"
+            "include": "#swx-vlan"
         },
         {
-            "include": "#swx-6.3-stp"
+            "include": "#swx-stp"
         },
         {
-            "include": "#swx-6.4-loop-detect"
+            "include": "#swx-loop-detect"
         },
         {
-            "include": "#swx-6.5-dhcp-snoop"
+            "include": "#swx-dhcp-snoop"
         },
         {
-            "include": "#swx-7.1-ipv4-addr"
+            "include": "#swx-ipv4-addr"
         },
         {
-            "include": "#swx-7.2-ipv4-route"
+            "include": "#swx-ipv4-route"
         },
         {
-            "include": "#swx-7.3-arp"
+            "include": "#swx-arp"
         },
         {
-            "include": "#swx-7.4-ipv4-forward"
+            "include": "#swx-ipv4-forward"
         },
         {
-            "include": "#swx-7.6-ipv6-addr"
+            "include": "#swx-ipv6-addr"
         },
         {
-            "include": "#swx-7.7-ipv6-route"
+            "include": "#swx-ipv6-route"
         },
         {
-            "include": "#swx-7.8-ipv6-neighbor"
+            "include": "#swx-ipv6-neighbor"
         },
         {
-            "include": "#swx-7.9-ipv6-forward"
+            "include": "#swx-ipv6-forward"
         },
         {
-            "include": "#swx-7.11-dns"
+            "include": "#swx-dns"
         },
         {
-            "include": "#swx-7.12-ospf"
+            "include": "#swx-ospf"
         },
         {
-            "include": "#swx-7.13-rip"
+            "include": "#swx-rip"
         },
         {
-            "include": "#swx-7.14-vrrp"
+            "include": "#swx-vrrp"
         },
         {
-            "include": "#swx-7.15-pbr"
+            "include": "#swx-pbr"
         },
         {
-            "include": "#swx-8.1-ip-multicast"
+            "include": "#swx-ip-multicast"
         },
         {
-            "include": "#swx-8.2-igmp"
+            "include": "#swx-igmp"
         },
         {
-            "include": "#swx-8.3-mld"
+            "include": "#swx-mld"
         },
         {
-            "include": "#swx-8.4-pim"
+            "include": "#swx-pim"
         },
         {
-            "include": "#swx-8.5-igmp-protocol"
+            "include": "#swx-igmp-protocol"
         },
         {
-            "include": "#swx-9.1-acl"
+            "include": "#swx-acl"
         },
         {
-            "include": "#swx-9.2-qos"
+            "include": "#swx-qos"
         },
         {
-            "include": "#swx-9.3-flowcontrol"
+            "include": "#swx-flowcontrol"
         },
         {
-            "include": "#swx-9.4-storm"
+            "include": "#swx-storm"
         },
         {
-            "include": "#swx-10.1-dhcp-server"
+            "include": "#swx-dhcp-server"
         },
         {
-            "include": "#swx-10.2-dhcp-relay"
+            "include": "#swx-dhcpv6-server"
         },
         {
-            "include": "#swx-10.3-dns-relay"
+            "include": "#swx-dhcp-relay"
         },
         {
-            "include": "#swx-10.4-radius"
+            "include": "#swx-dns-relay"
+        },
+        {
+            "include": "#swx-radius"
         },
         {
             "include": "#keyword",
@@ -300,7 +305,7 @@
                 }
             ]
         },
-        "swx-4.1-password": {
+        "swx-password": {
             "patterns": [
                 {
                     "comment": "4.1.1",
@@ -324,7 +329,7 @@
                 }
             ]
         },
-        "swx-4.2-user": {
+        "swx-user": {
             "patterns": [
                 {
                     "comment": "4.2.1",
@@ -367,7 +372,7 @@
                 }
             ]
         },
-        "swx-4.4-bootinfo": {
+        "swx-bootinfo": {
             "patterns": [
                 {
                     "comment": "7.6.1",
@@ -381,7 +386,7 @@
                 }
             ]
         },
-        "swx-4.8-clock": {
+        "swx-clock": {
             "patterns": [
                 {
                     "comment": "4.8.2",
@@ -418,7 +423,7 @@
                 }
             ]
         },
-        "swx-4.9-ptp": {
+        "swx-ptp": {
             "patterns": [
                 {
                     "comment": "4.9.1, 4.9.2",
@@ -458,7 +463,7 @@
                 }
             ]
         },
-        "swx-4.10-terminal": {
+        "swx-terminal": {
             "patterns": [
                 {
                     "comment": "4.10.1",
@@ -522,7 +527,7 @@
                 }
             ]
         },
-        "swx-4.11-management": {
+        "swx-management": {
             "patterns": [
                 {
                     "comment": "4.11.1",
@@ -536,7 +541,7 @@
                 }
             ]
         },
-        "swx-4.12-syslog": {
+        "swx-syslog": {
             "patterns": [
                 {
                     "comment": "4.12.1",
@@ -600,7 +605,7 @@
                 }
             ]
         },
-        "swx-4.13-snmp": {
+        "swx-snmp": {
             "patterns": [
                 {
                     "comment": "4.13.1",
@@ -739,7 +744,7 @@
                 }
             ]
         },
-        "swx-4.14-rmon": {
+        "swx-rmon": {
             "patterns": [
                 {
                     "comment": "4.14.1",
@@ -823,12 +828,89 @@
                 }
             ]
         },
-        "swx-4.15-telnet-server": {
+        "swx-sflow": {
             "patterns": [
                 {
                     "comment": "4.15.1",
+                    "match": "^\\s*sflow (enable|disable)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.15.2",
+                    "match": "^\\s*sflow agent (\\S+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.15.3",
+                    "match": "^\\s*sflow collector (\\S+)( \\d+)?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        },
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.15.4",
+                    "match": "^\\s*sflow collector max-datagram-size (\\d+)?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.15.5",
+                    "match": "^\\s*sflow sampling-rate (\\d+)?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.15.6",
+                    "match": "^\\s*sflow max-header-size (\\d+)?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.15.7",
+                    "match": "^\\s*sflow polling-interval (\\d+)?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-telnet-server": {
+            "patterns": [
+                {
+                    "comment": "4.16.1",
                     "match": "^\\s*telnet-server (enable|disable)( \\d+)?",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -839,9 +921,9 @@
                     }
                 },
                 {
-                    "comment": "4.15.1",
+                    "comment": "4.16.1",
                     "match": "^\\s*telnet-server interface (\\S+)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "string"
@@ -849,9 +931,9 @@
                     }
                 },
                 {
-                    "comment": "4.15.1",
+                    "comment": "4.16.1",
                     "match": "^\\s*telnet-server access (deny|permit) (\\S+)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -863,12 +945,12 @@
                 }
             ]
         },
-        "swx-4.16-telnet-client": {
+        "swx-telnet-client": {
             "patterns": [
                 {
-                    "comment": "4.15.1",
+                    "comment": "4.17.1",
                     "match": "^\\s*telnet-client (enable|disable)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -877,39 +959,39 @@
                 }
             ]
         },
-        "swx-4.17-tftp-server": {
-            "patterns": [
-                {
-                    "comment": "4.17.1",
-                    "match": "^\\s*tftp-server (enable|disable)( \\d+)?",
-                    "name": "support.function",
-                    "captures": {
-                        "1": {
-                            "name": "keyword.control"
-                        },
-                        "2": {
-                            "name": "constant.numeric"
-                        }
-                    }
-                },
-                {
-                    "comment": "4.17.1",
-                    "match": "^\\s*tftp-server interface (\\S+)",
-                    "name": "support.function",
-                    "captures": {
-                        "1": {
-                            "name": "string"
-                        }
-                    }
-                }
-            ]
-        },
-        "swx-4.18-http-server": {
+        "swx-tftp-server": {
             "patterns": [
                 {
                     "comment": "4.18.1",
+                    "match": "^\\s*tftp-server (enable|disable)( \\d+)?",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        },
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.18.1",
+                    "match": "^\\s*tftp-server interface (\\S+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-http-server": {
+            "patterns": [
+                {
+                    "comment": "4.19.1",
                     "match": "^\\s*http-server (enable|disable)( \\d+)?",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -920,9 +1002,9 @@
                     }
                 },
                 {
-                    "comment": "4.18.2",
+                    "comment": "4.19.2",
                     "match": "^\\s*http-server secure (enable|disable)( \\d+)?",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -933,9 +1015,9 @@
                     }
                 },
                 {
-                    "comment": "4.18.4",
+                    "comment": "4.19.4",
                     "match": "^\\s*http-server interface (\\S+)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "string"
@@ -943,9 +1025,9 @@
                     }
                 },
                 {
-                    "comment": "4.18.5",
+                    "comment": "4.19.5",
                     "match": "^\\s*http-server access (deny|permit) (\\S+)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -956,9 +1038,9 @@
                     }
                 },
                 {
-                    "comment": "4.18.6",
+                    "comment": "4.19.6",
                     "match": "^\\s*http-server language (japanese|english)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "entity.name.type"
@@ -966,9 +1048,9 @@
                     }
                 },
                 {
-                    "comment": "4.18.7",
+                    "comment": "4.19.7",
                     "match": "^\\s*http-server login-timeout (\\d+)(\\d+)?",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "constant.numeric"
@@ -980,36 +1062,36 @@
                 }
             ]
         },
-        "swx-4.19-http-proxy": {
-            "patterns": [
-                {
-                    "comment": "4.19.1",
-                    "match": "^\\s*http-proxy (enable|disable)",
-                    "name": "support.function",
-                    "captures": {
-                        "1": {
-                            "name": "keyword.control"
-                        }
-                    }
-                },
-                {
-                    "comment": "4.19.2",
-                    "match": "^\\s*http-proxy timeout (\\d+)",
-                    "name": "support.function",
-                    "captures": {
-                        "1": {
-                            "name": "constant.numeric"
-                        }
-                    }
-                }
-            ]
-        },
-        "swx-4.20-ssh-server": {
+        "swx-http-proxy": {
             "patterns": [
                 {
                     "comment": "4.20.1",
+                    "match": "^\\s*http-proxy (enable|disable)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "4.20.2",
+                    "match": "^\\s*http-proxy timeout (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+        },
+        "swx-ssh-server": {
+            "patterns": [
+                {
+                    "comment": "4.21.1",
                     "match": "^\\s*ssh-server (enable|disable)( \\d+)?",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -1020,9 +1102,9 @@
                     }
                 },
                 {
-                    "comment": "4.20.3",
+                    "comment": "4.21.3",
                     "match": "^\\s*ssh-server interface (\\S+)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "string"
@@ -1030,9 +1112,9 @@
                     }
                 },
                 {
-                    "comment": "4.20.4",
+                    "comment": "4.21.4",
                     "match": "^\\s*ssh-server access (deny|permit) (\\S+)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -1043,9 +1125,9 @@
                     }
                 },
                 {
-                    "comment": "4.20.8",
+                    "comment": "4.21.8",
                     "match": "^\\s*ssh-server client alive (enable|disable)( \\d+)?( \\d+)?",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -1060,12 +1142,12 @@
                 }
             ]
         },
-        "swx-4.21-ssh-client": {
+        "swx-ssh-client": {
             "patterns": [
                 {
-                    "comment": "4.21.2",
+                    "comment": "4.22.2",
                     "match": "^\\s*ssh-client (enable|disable)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -1074,10 +1156,10 @@
                 }
             ]
         },
-        "swx-4.22-mail": {
+        "swx-mail": {
             "patterns": [
                 {
-                    "comment": "4.22.1",
+                    "comment": "4.23.1",
                     "match": "^\\s*mail server smtp (\\d+) host (\\S+)( port (\\d+))?( encrypt (over-ssl|starttls))?( auth (\\S+ \\S+))?",
                     "name": "entity.name.function",
                     "captures": {
@@ -1099,7 +1181,7 @@
                     }
                 },
                 {
-                    "comment": "4.22.2",
+                    "comment": "4.23.2",
                     "match": "^\\s*mail server smtp (\\d+) name (\\S+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1112,7 +1194,7 @@
                     }
                 },
                 {
-                    "comment": "4.22.3",
+                    "comment": "4.23.3",
                     "match": "^\\s*mail notify (\\d+) trigger (lan-map(( (hardware|loop|sfp-power|queue-usage|poe|snapshot|l2ms))+)|terminal|stack)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1128,7 +1210,7 @@
                     }
                 },
                 {
-                    "comment": "4.22.4",
+                    "comment": "4.23.4",
                     "match": "^\\s*mail template (\\d+)",
                     "name": "storage",
                     "captures": {
@@ -1138,7 +1220,7 @@
                     }
                 },
                 {
-                    "comment": "4.22.5",
+                    "comment": "4.23.5",
                     "match": "^\\s*send server (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1148,7 +1230,7 @@
                     }
                 },
                 {
-                    "comment": "4.22.6, 4.22.7, 4.22.8",
+                    "comment": "4.23.6, 4.23.7, 4.23.8",
                     "match": "^\\s*send (from|to|subject) (\\S{1,256})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1158,7 +1240,7 @@
                     }
                 },
                 {
-                    "comment": "4.22.9",
+                    "comment": "4.23.9",
                     "match": "^\\s*send notify wait-time (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1168,7 +1250,7 @@
                     }
                 },
                 {
-                    "comment": "4.22.10, 4.22.12",
+                    "comment": "4.23.10, 4.23.12",
                     "match": "^\\s*mail send certificate(-notify)? (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1178,7 +1260,7 @@
                     }
                 },
                 {
-                    "comment": "4.22.12",
+                    "comment": "4.23.12",
                     "match": "^\\s*mail certificate expire-notify (\\d+( \\d+)?( \\d+)?)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1189,10 +1271,10 @@
                 }
             ]
         },
-        "swx-2.23-y-unos": {
+        "swx-y-unos": {
             "patterns": [
                 {
-                    "comment": "4.23.1",
+                    "comment": "4.24.1",
                     "match": "^\\s*y-unos (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1202,21 +1284,21 @@
                     }
                 },
                 {
-                    "comment": "4.23.2",
+                    "comment": "4.24.2",
                     "match": "^\\s*show y-unos",
                     "name": "storage"
                 }
             ]
         },
-        "swx-4.24-lldp": {
+        "swx-lldp": {
             "patterns": [
                 {
-                    "comment": "4.24.1, 4.24.4",
+                    "comment": "4.25.1, 4.25.4",
                     "match": "^\\s*lldp run|lldp-agent",
                     "name": "entity.name.function"
                 },
                 {
-                    "comment": "4.24.2, 4.24.3",
+                    "comment": "4.25.2, 4.25.3",
                     "match": "^\\s*lldp (system-description|system-name) (\\S{1,255})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1226,7 +1308,7 @@
                     }
                 },
                 {
-                    "comment": "4.24.5",
+                    "comment": "4.25.5",
                     "match": "^\\s*lldp auto-setting (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1236,7 +1318,7 @@
                     }
                 },
                 {
-                    "comment": "4.24.6",
+                    "comment": "4.25.6",
                     "match": "^\\s*set lldp enable (rxonly|txonly|txrx)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1246,7 +1328,7 @@
                     }
                 },
                 {
-                    "comment": "4.24.7",
+                    "comment": "4.25.7",
                     "match": "^\\s*set management-address-tlv (ip-address|mac-address)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1256,12 +1338,12 @@
                     }
                 },
                 {
-                    "comment": "4.24.8, 4.24.9, 4.24.10, 4.24.11",
+                    "comment": "4.25.8, 4.25.9, 4.25.10, 4.25.11",
                     "match": "^\\s*tlv-select (basic-mgmt|ieee-8021-org-specific|ieee-8023-org-specific|med)",
                     "name": "entity.name.function"
                 },
                 {
-                    "comment": "4.24.12, 4.24.13, 4.24.14",
+                    "comment": "4.25.12, 4.25.13, 4.25.14",
                     "match": "^\\s*set timer (msg-tx-interval|msg-fast-tx|reinit-delay) (\\d{1,4})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1271,7 +1353,7 @@
                     }
                 },
                 {
-                    "comment": "4.24.15, 4.24.16",
+                    "comment": "4.25.15, 4.25.16",
                     "match": "^\\s*set (msg-tx-hold|tx-fast-init) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1281,7 +1363,7 @@
                     }
                 },
                 {
-                    "comment": "4.24.17",
+                    "comment": "4.25.17",
                     "match": "^\\s*set too-many-neighbors limit (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1291,7 +1373,7 @@
                     }
                 },
                 {
-                    "comment": "4.24.18",
+                    "comment": "4.25.18",
                     "match": "^\\s*lldp interface enable (rxonly|txonly|txrx)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1302,15 +1384,15 @@
                 }
             ]
         },
-        "swx-4.25-l2ms": {
+        "swx-l2ms": {
             "patterns": [
                 {
-                    "comment": "4.25.1",
+                    "comment": "4.26.1",
                     "match": "^\\s*l2ms configuration",
                     "name": "storage"
                 },
                 {
-                    "comment": "4.25.2, 4.25.6, 4.25.8, 4.25.13, 4.25.15",
+                    "comment": "4.26.2, 4.26.6, 4.26.8, 4.26.13, 4.26.15",
                     "match": "^\\s*(l2ms( filter)?|(event|terminal)-watch|config-auto-set) (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1320,7 +1402,7 @@
                     }
                 },
                 {
-                    "comment": "4.25.3",
+                    "comment": "4.26.3",
                     "match": "^\\s*l2ms role (manager|agent)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1330,7 +1412,7 @@
                     }
                 },
                 {
-                    "comment": "4.25.4, 4.25.5",
+                    "comment": "4.26.4, 4.26.5",
                     "match": "^\\s*agent-watch (interval|down-count) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1340,7 +1422,7 @@
                     }
                 },
                 {
-                    "comment": "4.25.7, 4.25.12, 4.25.14",
+                    "comment": "4.26.7, 4.26.12, 4.26.14",
                     "match": "^\\s*((wireless-)?terminal|event)-watch interval (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1351,10 +1433,10 @@
                 }
             ]
         },
-        "swx-4.26-snapshot": {
+        "swx-snapshot": {
             "patterns": [
                 {
-                    "comment": "4.26.1",
+                    "comment": "4.27.1",
                     "match": "^\\s*snapshot (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1364,7 +1446,7 @@
                     }
                 },
                 {
-                    "comment": "4.26.1",
+                    "comment": "4.27.1",
                     "match": "^\\s*snapshot trap terminal( except-wireless)?",
                     "name": "entity.name.function",
                     "captures": {
@@ -1375,10 +1457,10 @@
                 }
             ]
         },
-        "swx-4.27-firmup": {
+        "swx-firmup": {
             "patterns": [
                 {
-                    "comment": "4.27.1",
+                    "comment": "4.28.1",
                     "match": "^\\s*firmware-update url (\\S{1,255})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1388,7 +1470,7 @@
                     }
                 },
                 {
-                    "comment": "4.27.2",
+                    "comment": "4.28.2",
                     "match": "^\\s*firmware-update http-proxy (\\S+) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1401,7 +1483,7 @@
                     }
                 },
                 {
-                    "comment": "4.27.4",
+                    "comment": "4.28.4",
                     "match": "^\\s*firmware-update timeout (\\d{3,5})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1411,7 +1493,7 @@
                     }
                 },
                 {
-                    "comment": "4.27.4",
+                    "comment": "4.28.4",
                     "match": "^\\s*firmware-update revision-down (enable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1421,7 +1503,7 @@
                     }
                 },
                 {
-                    "comment": "4.27.8",
+                    "comment": "4.28.8",
                     "match": "^\\s*firmware-update reload-time ((\\d+)( \\d+)?)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1431,7 +1513,7 @@
                     }
                 },
                 {
-                    "comment": "4.27.9",
+                    "comment": "4.28.9",
                     "match": "^\\s*firmware-update reload-method (normal|sequential)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1442,10 +1524,10 @@
                 }
             ]
         },
-        "swx-4.28-stack": {
+        "swx-stack": {
             "patterns": [
                 {
-                    "comment": "4.28.1",
+                    "comment": "4.29.1",
                     "match": "^\\s*stack (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1455,7 +1537,7 @@
                     }
                 },
                 {
-                    "comment": "4.28.2",
+                    "comment": "4.29.2",
                     "match": "^\\s*stack (1|2) renumber (1|2)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1468,7 +1550,7 @@
                     }
                 },
                 {
-                    "comment": "4.28.3",
+                    "comment": "4.29.3",
                     "match": "^\\s*stack subnet (auto-ip|(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}0)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1479,10 +1561,10 @@
                 }
             ]
         },
-        "swx-4.29-schedule": {
+        "swx-schedule": {
             "patterns": [
                 {
-                    "comment": "4.29.1",
+                    "comment": "4.30.1",
                     "match": "^\\s*schedule( \\d+)? (time \\S+ \\S+|event (startup|sd-attached)) (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1495,7 +1577,7 @@
                     }
                 },
                 {
-                    "comment": "4.29.3",
+                    "comment": "4.30.3",
                     "match": "^\\s*action (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1505,7 +1587,7 @@
                     }
                 },
                 {
-                    "comment": "4.29.4",
+                    "comment": "4.30.4",
                     "match": "^\\s*schedule template (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1515,7 +1597,7 @@
                     }
                 },
                 {
-                    "comment": "4.29.5",
+                    "comment": "4.30.5",
                     "match": "^\\s*cli-command (\\d+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1525,7 +1607,7 @@
                     }
                 },
                 {
-                    "comment": "4.29.6",
+                    "comment": "4.30.6",
                     "match": "^\\s*script (sd)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1536,10 +1618,10 @@
                 }
             ]
         },
-        "swx-4.30-buzzer": {
+        "swx-buzzer": {
             "patterns": [
                 {
-                    "comment": "4.30.1",
+                    "comment": "4.31.1",
                     "match": "^\\s*buzzer (enable|disable)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1549,7 +1631,7 @@
                     }
                 },
                 {
-                    "comment": "4.30.2",
+                    "comment": "4.31.2",
                     "match": "^\\s*buzzer trigger(( (temperature|fan|loop|spf|startup|sd|all))+)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1560,10 +1642,10 @@
                 }
             ]
         },
-        "swx-4.31-general": {
+        "swx-general": {
             "patterns": [
                 {
-                    "comment": "4.31.1",
+                    "comment": "4.32.1",
                     "match": "^\\s*hostname (\\S{,63})",
                     "name": "entity.name.function",
                     "captures": {
@@ -1573,7 +1655,7 @@
                     }
                 },
                 {
-                    "comment": "4.31.6",
+                    "comment": "4.32.6",
                     "match": "^\\s*led-mode default (link-act|off)",
                     "name": "entity.name.function",
                     "captures": {
@@ -1584,7 +1666,7 @@
                 }
             ]
         },
-        "swx-5.1-interface": {
+        "swx-interface": {
             "patterns": [
                 {
                     "comment": "5.1.2",
@@ -1676,7 +1758,7 @@
                 }
             ]
         },
-        "swx-5.2-lag": {
+        "swx-lag": {
             "patterns": [
                 {
                     "comment": "5.2.1",
@@ -1753,7 +1835,7 @@
                 }
             ]
         },
-        "swx-5.3-auth": {
+        "swx-auth": {
             "patterns": [
                 {
                     "comment": "5.3.1",
@@ -2027,7 +2109,7 @@
                 }
             ]
         },
-        "swx-5.4-portsec": {
+        "swx-portsec": {
             "patterns": [
                 {
                     "comment": "5.4.1",
@@ -2070,7 +2152,7 @@
                 }
             ]
         },
-        "swx-5.5-errdisable": {
+        "swx-errdisable": {
             "patterns": [
                 {
                     "comment": "5.5.1",
@@ -2087,7 +2169,7 @@
                 }
             ]
         },
-        "swx-6.1-fdb": {
+        "swx-fdb": {
             "patterns": [
                 {
                     "comment": "6.1.1",
@@ -2130,7 +2212,7 @@
                 }
             ]
         },
-        "swx-6.2-vlan": {
+        "swx-vlan": {
             "patterns": [
                 {
                     "comment": "6.2.1",
@@ -2289,7 +2371,7 @@
                 }
             ]
         },
-        "swx-6.3-stp": {
+        "swx-stp": {
             "patterns": [
                 {
                     "comment": "6.3.1",
@@ -2444,7 +2526,7 @@
                 }
             ]
         },
-        "swx-6.4-loop-detect": {
+        "swx-loop-detect": {
             "patterns": [
                 {
                     "comment": "6.4.1, 6.4.2, 6.4.3",
@@ -2468,7 +2550,7 @@
                 }
             ]
         },
-        "swx-6.5-dhcp-snoop": {
+        "swx-dhcp-snoop": {
             "patterns": [
                 {
                     "comment": "6.5.1, 6.5.2",
@@ -2572,7 +2654,7 @@
                 }
             ]
         },
-        "swx-7.1-ipv4-addr": {
+        "swx-ipv4-addr": {
             "patterns": [
                 {
                     "comment": "7.1.1",
@@ -2612,7 +2694,7 @@
                 }
             ]
         },
-        "swx-7.2-ipv4-route": {
+        "swx-ipv4-route": {
             "patterns": [
                 {
                     "comment": "7.2.1",
@@ -2642,7 +2724,7 @@
                 }
             ]
         },
-        "swx-7.3-arp": {
+        "swx-arp": {
             "patterns": [
                 {
                     "comment": "7.3.3",
@@ -2676,12 +2758,12 @@
                 }
             ]
         },
-        "swx-7.4-ipv4-forward": {
+        "swx-ipv4-forward": {
             "patterns": [
                 {
                     "comment": "7.4.1",
                     "match": "^\\s*ip forwarding (enable|disable)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -2691,7 +2773,7 @@
                 {
                     "comment": "7.4.3",
                     "match": "^\\s*ip directed-broadcast (enable|disable)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -2701,7 +2783,7 @@
                 {
                     "comment": "7.4.4",
                     "match": "^\\s*mtu (\\d+)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "constant.numeric"
@@ -2710,7 +2792,7 @@
                 }
             ]
         },
-        "swx-7.6-ipv6-addr": {
+        "swx-ipv6-addr": {
             "patterns": [
                 {
                     "comment": "7.6.1",
@@ -2736,10 +2818,50 @@
                     "comment": "7.6.3",
                     "match": "^\\s*ipv6 address autoconfig",
                     "name": "entity.name.function"
+                },
+                {
+                    "comment": "7.6.4",
+                    "match": "^\\s*ipv6 address (dhcp)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.6.5",
+                    "match": "^\\s*ipv6 address pd (\\S+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.6.6",
+                    "match": "^\\s*ipv6 dhcp pd (\\S+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "7.6.11",
+                    "match": "^\\s*ipv6 dhcp client nd-prefix (\\d+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "constant.numeric"
+                        }
+                    }
                 }
             ]
         },
-        "swx-7.7-ipv6-route": {
+        "swx-ipv6-route": {
             "patterns": [
                 {
                     "comment": "7.7.1",
@@ -2759,12 +2881,12 @@
                 }
             ]
         },
-        "swx-7.8-ipv6-neighbor": {
+        "swx-ipv6-neighbor": {
             "patterns": [
                 {
                     "comment": "7.8.1",
                     "match": "^\\s*ipv6 neighbor (\\S+ \\S+ \\S+)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "string"
@@ -2773,12 +2895,12 @@
                 }
             ]
         },
-        "swx-7.9-ipv6-forward": {
+        "swx-ipv6-forward": {
             "patterns": [
                 {
                     "comment": "7.9.1",
                     "match": "^\\s*ipv6 forwarding (enable|disable)",
-                    "name": "support.function",
+                    "name": "entity.name.function",
                     "captures": {
                         "1": {
                             "name": "keyword.control"
@@ -2787,7 +2909,7 @@
                 }
             ]
         },
-        "swx-7.11-dns": {
+        "swx-dns": {
             "patterns": [
                 {
                     "comment": "7.11.1",
@@ -2811,7 +2933,7 @@
                 }
             ]
         },
-        "swx-7.12-ospf": {
+        "swx-ospf": {
             "patterns": [
                 {
                     "comment": "7.12.1",
@@ -3463,7 +3585,7 @@
                 }
             ]
         },
-        "swx-7.13-rip": {
+        "swx-rip": {
             "patterns": [
                 {
                     "comment": "7.13.1",
@@ -3656,7 +3778,7 @@
                 }
             ]
         },
-        "swx-7.14-vrrp": {
+        "swx-vrrp": {
             "patterns": [
                 {
                     "comment": "7.14.1, 7.14.2",
@@ -3736,7 +3858,7 @@
                 }
             ]
         },
-        "swx-7.15-pbr": {
+        "swx-pbr": {
             "patterns": [
                 {
                     "comment": "7.15.1",
@@ -3821,7 +3943,7 @@
                 }
             ]
         },
-        "swx-8.1-ip-multicast": {
+        "swx-ip-multicast": {
             "patterns": [
                 {
                     "comment": "8.1.1",
@@ -3920,7 +4042,7 @@
                 }
             ]
         },
-        "swx-8.2-igmp": {
+        "swx-igmp": {
             "patterns": [
                 {
                     "comment": "8.2.1",
@@ -4004,7 +4126,7 @@
                 }
             ]
         },
-        "swx-8.3-mld": {
+        "swx-mld": {
             "patterns": [
                 {
                     "comment": "8.3.1",
@@ -4068,7 +4190,7 @@
                 }
             ]
         },
-        "swx-8.4-pim": {
+        "swx-pim": {
             "patterns": [
                 {
                     "comment": "8.4.1",
@@ -4326,7 +4448,7 @@
                 }
             ]
         },
-        "swx-8.5-igmp-protocol": {
+        "swx-igmp-protocol": {
             "patterns": [
                 {
                     "comment": "8.5.1",
@@ -4504,7 +4626,7 @@
                 }
             ]
         },
-        "swx-9.1-acl": {
+        "swx-acl": {
             "patterns": [
                 {
                     "comment": "9.1.1, 9.1.4, 9.1.7",
@@ -4578,7 +4700,7 @@
                 }
             ]
         },
-        "swx-9.2-qos": {
+        "swx-qos": {
             "patterns": [
                 {
                     "comment": "9.2.1",
@@ -4846,7 +4968,7 @@
                 }
             ]
         },
-        "swx-9.3-flowcontrol": {
+        "swx-flowcontrol": {
             "patterns": [
                 {
                     "comment": "9.3.1, 9.3.2",
@@ -4860,7 +4982,7 @@
                 }
             ]
         },
-        "swx-9.4-storm": {
+        "swx-storm": {
             "patterns": [
                 {
                     "comment": "9.4.1",
@@ -4877,7 +4999,7 @@
                 }
             ]
         },
-        "swx-10.1-dhcp-server": {
+        "swx-dhcp-server": {
             "patterns": [
                 {
                     "comment": "10.1.1, 10.1.2, 10.1.9",
@@ -4997,7 +5119,42 @@
                 }
             ]
         },
-        "swx-10.2-dhcp-relay": {
+        "swx-dhcpv6-server": {
+            "patterns": [
+                {
+                    "match": "^dhcpv6-server (enable|disable)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s+dhcpv6-server (\\S+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "match": "^dhcpv6 pool (\\S+)",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "1": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*prefix-delegation ",
+                    "name": "entity.name.function"
+                }
+            ]
+        },
+        "swx-dhcp-relay": {
             "patterns": [
                 {
                     "comment": "10.2.1, 10.2.3",
@@ -5021,7 +5178,7 @@
                 }
             ]
         },
-        "swx-10.3-dns-relay": {
+        "swx-dns-relay": {
             "patterns": [
                 {
                     "comment": "10.3.1, 10.3.2",
@@ -5068,7 +5225,7 @@
                 }
             ]
         },
-        "swx-10.4-radius": {
+        "swx-radius": {
             "patterns": [
                 {
                     "comment": "10.4.1",
