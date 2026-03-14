@@ -37,7 +37,8 @@
         },
         {
             "include": "#swx-rmon"
-        }, {
+        },
+        {
             "include": "#swx-sflow"
         },
         {
@@ -105,6 +106,9 @@
         },
         {
             "include": "#swx-errdisable"
+        },
+        {
+            "include": "#swx-poe"
         },
         {
             "include": "#swx-fdb"
@@ -220,7 +224,7 @@
                 },
                 {
                     "match": "^\\s*no (.*)",
-                    "name": "keyword.control",
+                    "name": "invalid",
                     "captures": {
                         "1": {
                             "name": "comment.line"
@@ -1294,7 +1298,7 @@
             "patterns": [
                 {
                     "comment": "4.25.1, 4.25.4",
-                    "match": "^\\s*lldp run|lldp-agent",
+                    "match": "^\\s*(lldp run|lldp-agent)",
                     "name": "entity.name.function"
                 },
                 {
@@ -2169,6 +2173,68 @@
                 }
             ]
         },
+        "swx-poe": {
+            "patterns": [
+                {
+                    "comment": "PoE給電機能の設定(システム・インタフェース)",
+                    "match": "\\b(power-inline (enable|disable (\\d{1,3})?))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        },
+                        "3": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "PoEポートの説明文の設定",
+                    "match": "\\b(power-inline description (\\S{1,64}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "string"
+                        }
+                    }
+                },
+                {
+                    "comment": "PoEポートの給電優先度の設定",
+                    "match": "\\b(power-inline priority (critical|high|low))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "PoEポートのContinuous PoEの設定",
+                    "match": "\\b(power-inline continuous (enable|disable))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "keyword.control"
+                        }
+                    }
+                },
+                {
+                    "comment": "ガードバンドの設定",
+                    "match": "\\b(power-inline guardband (\\d{1,3}))\\b",
+                    "name": "entity.name.function",
+                    "captures": {
+                        "2": {
+                            "name": "constant.numeric"
+                        }
+                    }
+                },
+                {
+                    "comment": "PoE給電情報の表示",
+                    "match": "\\b(show power-inline)\\b",
+                    "name": "entity.name.function"
+                }
+            ]
+        },
         "swx-fdb": {
             "patterns": [
                 {
@@ -2937,7 +3003,7 @@
             "patterns": [
                 {
                     "comment": "7.12.1",
-                    "match": "^\\s*router ospf (\\d+)",
+                    "match": "^\\s*router ospf( \\d+)?",
                     "name": "entity.name.function",
                     "captures": {
                         "1": {
