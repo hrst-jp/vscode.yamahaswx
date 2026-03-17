@@ -9,7 +9,7 @@ YAMAHA LANスイッチ SWXシリーズの設定ファイルをハイライト表
 
 # 使用方法
 show startup-config または show running-config で表示された結果を  
-拡張子に ".swx"を設定して保存したファイルを開きます。
+拡張子が ".swx" または ".swx.txt" のファイルを開きます。
 
 # 対象製品
 SWX3220-16MT/SWX3220-16TMs  
